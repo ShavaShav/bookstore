@@ -13,9 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using UnitTestLoginPage;
+using BookStoreLib;
 
-namespace zsLoginPage
+namespace BookStoreGUI
 {
      /// <summary>
      /// Interaction logic for MainWindow.xaml

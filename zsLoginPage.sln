@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2019
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "zsLoginPage", "zsLoginPage\zsLoginPage.csproj", "{5C17A564-76A4-44C8-AB4D-A1456329902B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreGUI", "zsLoginPage\BookStoreGUI.csproj", "{5C17A564-76A4-44C8-AB4D-A1456329902B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTestLoginPage", "UnitTestLoginPage\UnitTestLoginPage.csproj", "{72E00D8B-7B77-41F5-93C8-27DB552EA04B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookStoreLib", "UnitTestLoginPage\BookStoreLib.csproj", "{72E00D8B-7B77-41F5-93C8-27DB552EA04B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

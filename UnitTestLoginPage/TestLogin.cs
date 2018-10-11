@@ -1,11 +1,11 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace UnitTestLoginPage
+namespace BookStoreLib
 {
 
      [TestClass]
-     public class LoginUnitTest
+     public class TestLogin
      {
 
           [TestInitialize]
