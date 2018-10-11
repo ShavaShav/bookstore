@@ -30,7 +30,7 @@
                          <ComboBox x:Name="comboBoxCategories" VerticalAlignment="Center" Height="24" MinWidth="200"/>
                     </StackPanel>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                         <Button x:Name="buttonLogin" Content="Login" Click="CheckoutButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,10,0"/>
+                         <Button x:Name="buttonLogin" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,10,0"/>
                          <Button x:Name="buttonExit" Content="Exit" Click="ExitButton_Click" VerticalAlignment="Center" Width="60" Padding="5"/>
                     </StackPanel>
                </Grid>
