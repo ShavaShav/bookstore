@@ -28,6 +28,11 @@ namespace BookStoreGUI
                InitializeComponent();
           }
 
+          private void Window_Loaded(object sender, RoutedEventArgs e)
+          {
+
+          }
+
           private void listViewOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
           {
 
