@@ -48,7 +48,7 @@ namespace BookStoreGUI
                {
                     // Login successful
                     User = loginDialog.User;
-                    this.textBlockStatus.Text = "You are logged in as " + User.Username + ".";
+                    this.textBlockStatus.Text = "You are logged in as " + User.FullName + ".";
                }
           }
 

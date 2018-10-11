@@ -14,11 +14,14 @@ namespace BookStoreLib
           public int Id { set; get; }
           public string Username { set; get; }
           public string Password { set; get; }
-          public Boolean IsLoggedIn { set; get; }
+          public string FullName { set; get; }
+          public string Type { set; get; }
+          public bool IsManager { set; get; }
+          public bool IsLoggedIn { set; get; }
           public List<string> ErrorMessages { set; get; }
 
           // Returns true if successful login
-          public Boolean Login(string username, string password)
+          public bool Login(string username, string password)
           {
                ErrorMessages = new List<string>();
 
@@ -59,22 +62,25 @@ namespace BookStoreLib
 
                // Attempt login
                DALUser dbUser = new DALUser();
-               this.Id = dbUser.Login(username, password);
+               this.IsLoggedIn = dbUser.Login(username, password);
                
-               if (this.Id >= 0)
+               if (this.IsLoggedIn)
                {
                     // Successful login, set user
-                    this.Username = username;
-                    this.Password = password;
-                    return true;
+                    this.Username = dbUser.Username;
+                    this.Password = dbUser.Password;
+                    this.FullName = dbUser.FullName;
+                    this.Type = dbUser.Type;
+                    this.IsManager = dbUser.IsManager;
                }
                else
                {
                     // Wrong username/password
                     this.Id = -1;
                     ErrorMessages.Add("Incorrect username or password.");
-                    return false;
                }
+
+               return this.IsLoggedIn;
           }
      }
 }
