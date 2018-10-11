@@ -12,6 +12,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
+using BookStoreLib;
+
 namespace BookStoreGUI
 {
      /// <summary>
@@ -19,6 +21,8 @@ namespace BookStoreGUI
      /// </summary>
      public partial class MainWindow : Window
      {
+          private User User { get; set; } // instance of current user
+
           public MainWindow()
           {
                InitializeComponent();
@@ -31,12 +35,21 @@ namespace BookStoreGUI
 
           private void LoginButton_Click(object sender, RoutedEventArgs e)
           {
+               var loginDialog = new LoginDialog();
+               loginDialog.Owner = this;
+               loginDialog.ShowDialog();
 
+               if (loginDialog.DialogResult == true)
+               {
+                    // Login successful
+                    User = loginDialog.User;
+                    this.textBlockStatus.Text = "You are logged in as " + User.Username + ".";
+               }
           }
 
           private void ExitButton_Click(object sender, RoutedEventArgs e)
           {
-
+               this.Close();
           }
 
           private void AddBookButton_Click(object sender, RoutedEventArgs e)

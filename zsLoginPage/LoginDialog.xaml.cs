@@ -22,6 +22,8 @@ namespace BookStoreGUI
      /// </summary>
      public partial class LoginDialog : Window
      {
+          public User User { get; private set; }
+
           public LoginDialog()
           {
                InitializeComponent();
@@ -33,20 +35,25 @@ namespace BookStoreGUI
                string password = this.passwordTextBox.Password;
 
                // Attempt login
-               var user = new User();
-               if (user.Login(username, password))
+               User = new User();
+               if (User.Login(username, password))
                {
-                    MessageBox.Show("You are logged in as User #" + user.Id);
+                    // Logged in succesfully, close.
+                    this.DialogResult = true;
+                    this.Close();
                }
                else
                {
+                    // Login failed. Don't close yet, show errors and let user correct
                     MessageBox.Show("Please correct the following errors and try again: \n\n" 
-                         + String.Join("\n", user.ErrorMessages));
+                         + String.Join("\n", User.ErrorMessages));
                }
           }
 
           private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
           {
+               // Login aborted, close.
+               this.DialogResult = false;
                this.Close();
           }
      }

@@ -27,8 +27,7 @@ namespace BookStoreLib.Properties {
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
         [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Zach\\Repos\\visual-studio\\z" +
-            "sLoginPage\\zsLoginPage\\ZSdatabase.mdf;Integrated Security=True;Connect Timeout=3" +
-            "0")]
+            "sLoginPage\\zsBookstoreDB.mdf;Integrated Security=True;Connect Timeout=30")]
         public string ZSDatabaseConnectionString {
             get {
                 return ((string)(this["ZSDatabaseConnectionString"]));
