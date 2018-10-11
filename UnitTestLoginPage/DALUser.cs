@@ -5,19 +5,24 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestLoginPage
+namespace BookStoreLib
 {
-     public class UserDA
+     /**
+     * Data access object for User table 
+     */
+     public class DALUser
      {
           public int Login(string username, string password)
           {
                var conn = new SqlConnection(Properties.Settings.Default.ZSDatabaseConnectionString);
                try
                {
-                    SqlCommand loginSQL = new SqlCommand();
-                    loginSQL.Connection = conn;
-                    loginSQL.CommandText = "Select Id from [User] where "
-                         + "Username = @Username and Password = @Password ";
+                    SqlCommand loginSQL = new SqlCommand
+                    {
+                         Connection = conn,
+                         CommandText = "Select Id from [User] where "
+                         + "Username = @Username and Password = @Password "
+                    };
                     loginSQL.Parameters.AddWithValue("@Username", username);
                     loginSQL.Parameters.AddWithValue("@Password", password);
                     conn.Open();

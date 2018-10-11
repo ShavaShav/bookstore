@@ -4,8 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace UnitTestLoginPage
+namespace BookStoreLib
 {
+     /**
+     * User model 
+     */
      public class User
      {
           public int Id { set; get; }
@@ -55,7 +58,7 @@ namespace UnitTestLoginPage
                }
 
                // Attempt login
-               UserDA dbUser = new UserDA();
+               DALUser dbUser = new DALUser();
                this.Id = dbUser.Login(username, password);
                
                if (this.Id >= 0)

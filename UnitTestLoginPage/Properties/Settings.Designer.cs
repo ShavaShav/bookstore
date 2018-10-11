@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace UnitTestLoginPage.Properties {
+namespace BookStoreLib.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
