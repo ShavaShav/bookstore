@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<activityDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 8.5" name="MainGUI">
+  <activityRootModelMoniker Id="15fc89e4-1b59-4a7c-8684-53c2e9dd72a9" />
+  <nestedChildShapes>
+    <activityFinalNodeShape Id="bcb237e3-75b9-42fb-9d08-5150a6d40f7e" absoluteBounds="1.75, 1, 0.125, 0.125" customColor="89, 89, 89">
+      <activityFinalNodeMoniker Id="e4841bdc-6145-47bb-b749-3301ee203681" LastKnownName="ActivityFinal1" />
+    </activityFinalNodeShape>
+    <initialNodeShape Id="e6430d02-f78c-48eb-89fb-a3d145ebddd8" absoluteBounds="1.75, 2.5, 0.125, 0.125" customColor="89, 89, 89">
+      <initialNodeMoniker Id="4c41ad71-18ed-470a-8f11-47d6798771db" LastKnownName="Initial1" />
+    </initialNodeShape>
+    <actionShape Id="cc3530ad-6951-4702-aa74-56f6cf7b4f41" absoluteBounds="3.25, 0.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="9fd89aa0-b85f-4459-9291-88f232d34a36" LastKnownName="&quot;Exit&quot;" />
+    </actionShape>
+    <actionShape Id="20caf5cb-b3df-45d3-9044-da95d2939693" absoluteBounds="6.375, 2.5, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="c98c77c4-411b-4cca-88a8-a15a058458c1" LastKnownName="&quot;Login&quot;" />
+    </actionShape>
+    <actionShape Id="f9a95044-c977-4274-9500-b25f32ab6089" absoluteBounds="5, 3.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="59f6bb47-bd18-43ec-af3c-986e80f6c0bd" LastKnownName="&quot;Cancel&quot;" />
+    </actionShape>
+    <actionShape Id="761a00fb-7d63-44da-bea9-54fed519c3de" absoluteBounds="8.5, 3.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="1e29f074-9dff-4447-ac1c-0fbf263d9fec" LastKnownName="Enter Password" />
+    </actionShape>
+    <actionShape Id="e6947f8e-6af3-4043-b061-e580f708e2d9" absoluteBounds="2.75, 2.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="e638b3a2-7158-448d-baea-811ae537037f" LastKnownName="View Book" />
+    </actionShape>
+    <actionShape Id="a24de0a8-8c18-4b88-acd6-f7c8c52d8504" absoluteBounds="7.125, 4.875, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="c339b246-3a3b-4269-9b32-ef2799a9d38d" LastKnownName="&quot;OK&quot;" />
+    </actionShape>
+    <actionShape Id="0f835922-1c1f-46ee-9ba8-e5abe39a30f5" absoluteBounds="7.125, 6.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="009d8a6c-7934-4eb2-b851-e72525124f61" LastKnownName="Update User" />
+    </actionShape>
+    <actionShape Id="57885b0e-ad7a-4c84-8cfe-d3ea6b4c4608" absoluteBounds="5.25, 5.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="8dad3943-0ce9-411b-8884-97b1ad9e4683" LastKnownName="Invalid User" />
+    </actionShape>
+    <forkNodeShape Id="a35504c9-00cd-46d4-ad17-3ae6a5a44709" absoluteBounds="6.875, 3.5, 1.125, 0.125" customColor="32, 32, 32">
+      <forkNodeMoniker Id="f3f89dbf-bfe9-4c38-852e-d7afaf220a5c" LastKnownName="Fork1" />
+      <relativeChildShapes />
+    </forkNodeShape>
+    <controlFlowConnector edgePoints="[(7.1875 : 2.875); (7.1875 : 3.5)]" fixedFrom="Algorithm" fixedTo="Algorithm" customColor="Black">
+      <controlFlowMoniker Id="5cd9119f-3ad8-4c5c-86d5-f0daea86a289" />
+      <relativeChildShapes />
+      <nodes>
+        <actionShapeMoniker Id="20caf5cb-b3df-45d3-9044-da95d2939693" />
+        <forkNodeShapeMoniker Id="a35504c9-00cd-46d4-ad17-3ae6a5a44709" />
+      </nodes>
+    </controlFlowConnector>
+    <actionShape Id="7e006440-a633-4c41-98fe-e5474a12b43b" absoluteBounds="6.25, 4.125, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="613c82ff-f7fb-44d8-884b-76ff71baf735" LastKnownName="Enter Name" />
+    </actionShape>
+    <actionShape Id="02b18820-5042-4c78-a606-e85ae4c9e322" absoluteBounds="8.25, 0.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="ccbd65df-3738-434f-848a-fdaf9bb5a43e" LastKnownName="&quot;Place Order&quot;" />
+    </actionShape>
+    <actionShape Id="a447f87c-05f7-4398-9601-0a5651291dcd" absoluteBounds="7.25, 1.375, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="461eeb98-f583-4d15-b10a-1e9103de3b37" LastKnownName="Update Order" />
+    </actionShape>
+    <objectNodeShape Id="9f463ce9-ef3c-469b-8a40-36d7bc114aa5" absoluteBounds="5.125, 2, 1.125, 0.375" customColor="White">
+      <objectNodeMoniker Id="9d6870b3-509a-4e41-b463-242db7952550" LastKnownName="Data Store" />
+    </objectNodeShape>
+    <actionShape Id="6e651813-aa89-48e2-b146-1c01967a706f" absoluteBounds="2.75, 3.125, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="14358ef0-a473-469d-a63f-9e632914e1ec" LastKnownName="Select Book" />
+    </actionShape>
+    <actionShape Id="133a3ea1-1768-4abb-b53c-dec33214de8e" absoluteBounds="2.75, 4, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="e3c824a6-7d6f-47a8-8e7c-35abc32a5d03" LastKnownName="&quot;Add Book&quot;" />
+    </actionShape>
+    <actionShape Id="a8226659-d7d1-46da-847d-e8c56fbd3151" absoluteBounds="1.625, 4.875, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="52da8966-32ae-4377-9c8a-37fff4f17f93" LastKnownName="Set Quantity" />
+    </actionShape>
+    <actionShape Id="37d3bcaa-e3f2-411e-b059-7d3ebcbee9eb" absoluteBounds="3.75, 4.875, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="bba8d102-c65d-42bf-ad5a-02191fbb6efa" LastKnownName="&quot;Cancel&quot;" />
+    </actionShape>
+    <actionShape Id="6e6e274e-3216-4deb-82b3-c97eabb167ae" absoluteBounds="2.875, 5.625, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="db54faf8-265e-412c-8438-1ce8077784b2" LastKnownName="&quot;OK&quot;" />
+    </actionShape>
+    <actionShape Id="5a580d4d-267f-4e54-9e15-bbfac0618541" absoluteBounds="2.75, 6.75, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="4abf5e97-db1a-409e-a63d-d7f79c2610ec" LastKnownName="Update List" />
+    </actionShape>
+    <actionShape Id="357719d9-10b1-4135-bbee-e256bf32e8b7" absoluteBounds="8.5, 2.25, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="70902e5d-ee2d-48f3-9443-a8560b7ac25b" LastKnownName="Error Message" />
+    </actionShape>
+    <actionShape Id="bfd32d47-f79f-4203-82ed-5cf9a6bbcedc" absoluteBounds="3.625, 1.5, 1.125, 0.375" customColor="161, 199, 231">
+      <opaqueActionMoniker Id="6c06653c-b0e9-4a7a-b338-6dfea2b1ab34" LastKnownName="Select Catalog" />
+    </actionShape>
+  </nestedChildShapes>
+</activityDiagram>
