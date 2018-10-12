@@ -36,11 +36,33 @@
           <initialNode
             Id="bd851446-057b-4346-9a69-02a3c45f39c2"
             name="Initial1"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="25aebf20-7e5b-4f9c-9db9-b631604f66ed"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="023d1aca-dc78-461e-b557-bd824394550b"
+                  LastKnownName="View Books"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </initialNode>
           <opaqueAction
             Id="6912f666-8b08-4f5c-8ae6-344acccabdfb"
             name="&quot;Exit&quot;"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e0f73e4f-75b7-4cdd-870d-4b1e577e2303"
+                isLeaf="false">
+                <activityFinalNodeMoniker
+                  Id="e4e7da72-5656-4658-94f4-3737bd1033b4"
+                  LastKnownName="ActivityFinal1"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
           <opaqueAction
             Id="c87e4e5d-841f-4350-9f17-58bc220d11a7"
             name="&quot;Login&quot;"
@@ -59,49 +81,208 @@
           <opaqueAction
             Id="1bf15194-b8e8-48e8-82c4-7f20f5a215d3"
             name="&quot;Cancel&quot;"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="202d371c-0fa8-4865-8bfa-2fb9ce090ac2"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="023d1aca-dc78-461e-b557-bd824394550b"
+                  LastKnownName="View Books"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
           <opaqueAction
             Id="ac0bf528-fefa-4ebf-9fde-6f31746ddf19"
             name="Enter Password"
-            isLeaf="false" />
+            isLeaf="false">
+            <pins>
+              <opaqueActionHasOutputValues>
+                <outputPin
+                  Id="b814bb7e-6c55-46c9-8d71-ea3bec7a62a7"
+                  name="Password"
+                  isLeaf="false"
+                  ordering="Unordered"
+                  isControlType="false"
+                  isControl="false">
+                  <objectFlowTargets>
+                    <objectFlow
+                      Id="cf64a6d0-68d8-4311-bcea-50b049d0d953"
+                      isLeaf="false"
+                      isMulticast="false"
+                      isMultireceive="false">
+                      <opaqueActionMoniker
+                        Id="3ef3ecdb-fdaa-4896-a96e-8b8724150117"
+                        LastKnownName="&quot;OK&quot;"
+                        LastKnownLocation="ModelingMainGUI.uml" />
+                    </objectFlow>
+                  </objectFlowTargets>
+                  <upperBound>
+                    <literalInteger
+                      Id="1333f717-1617-4cf4-bb7c-4861c95e888c"
+                      name="2147483647"
+                      value="2147483647" />
+                  </upperBound>
+                </outputPin>
+              </opaqueActionHasOutputValues>
+            </pins>
+          </opaqueAction>
           <opaqueAction
             Id="023d1aca-dc78-461e-b557-bd824394550b"
-            name="View Book"
-            isLeaf="false" />
+            name="View Books"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e8434ba5-6a03-444a-931f-b77602350d99"
+                isLeaf="false">
+                <forkNodeMoniker
+                  Id="89967f9a-23d8-4b69-86f7-2eae4bfd0c5f"
+                  LastKnownName="Fork2"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
           <opaqueAction
             Id="3ef3ecdb-fdaa-4896-a96e-8b8724150117"
             name="&quot;OK&quot;"
-            isLeaf="false" />
-          <opaqueAction
-            Id="ffd93570-89d1-461c-bc01-936bb0c2006a"
-            name="Update User"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="fd71151c-b354-4ee1-8ae1-a738595a9ac8"
+                isLeaf="false">
+                <decisionNodeMoniker
+                  Id="53e7cd10-3cdc-4ea7-ac72-4edeae35ca94"
+                  LastKnownName="Decision1"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+            <pins>
+              <opaqueActionHasInputValues>
+                <inputPin
+                  Id="52ac0a8b-bb9a-4173-966f-0ebe99dfa423"
+                  name="User Data"
+                  isLeaf="false"
+                  ordering="Unordered"
+                  isControlType="false"
+                  isControl="false">
+                  <upperBound>
+                    <literalInteger
+                      Id="61b03703-943a-4913-80f6-f3ff5d1189e5"
+                      name="2147483647"
+                      value="2147483647" />
+                  </upperBound>
+                </inputPin>
+              </opaqueActionHasInputValues>
+            </pins>
+          </opaqueAction>
           <opaqueAction
             Id="c6127e2f-a99f-4e55-9e46-f4ef02412e4b"
             name="Invalid User"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="e7cde7e5-fbe1-4f6d-8a18-d30898f86147"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="a57adf5e-798b-4e7a-8c55-d3a1eaa4e82a"
+                  LastKnownName="Error Message"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
           <forkNode
             Id="559a358a-a025-4b6d-a2a1-5d586c65e0bd"
             name="Fork1"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="b2d8f34c-cdc1-4fe1-8776-ea567d43508e"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="9b6cb350-4ab5-41b1-a600-1d2b8b7bee17"
+                  LastKnownName="Enter Name"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="c5224eaa-a235-48fc-8ce9-01912274b3be"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="ac0bf528-fefa-4ebf-9fde-6f31746ddf19"
+                  LastKnownName="Enter Password"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="ad2c4ffe-dbb2-45c2-83cb-c638ee7570d2"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="3ef3ecdb-fdaa-4896-a96e-8b8724150117"
+                  LastKnownName="&quot;OK&quot;"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="edfd298b-a621-4195-833a-4f0b729f5c50"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="1bf15194-b8e8-48e8-82c4-7f20f5a215d3"
+                  LastKnownName="&quot;Cancel&quot;"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
           <opaqueAction
             Id="9b6cb350-4ab5-41b1-a600-1d2b8b7bee17"
             name="Enter Name"
-            isLeaf="false" />
-          <opaqueAction
-            Id="8807ddbb-da6f-42cf-b30e-4fa301864515"
-            name="&quot;Place Order&quot;"
-            isLeaf="false" />
-          <opaqueAction
-            Id="af1c4e64-6bf0-4f8a-aea2-4e4f73f84d1d"
-            name="Update Order"
-            isLeaf="false" />
+            isLeaf="false">
+            <pins>
+              <opaqueActionHasOutputValues>
+                <outputPin
+                  Id="01ae5036-4b23-4f4a-a413-1f8d291c203e"
+                  name="Username"
+                  isLeaf="false"
+                  ordering="Unordered"
+                  isControlType="false"
+                  isControl="false">
+                  <objectFlowTargets>
+                    <objectFlow
+                      Id="434a0944-beee-4082-84a8-cdcde9a86579"
+                      isLeaf="false"
+                      isMulticast="false"
+                      isMultireceive="false">
+                      <opaqueActionMoniker
+                        Id="3ef3ecdb-fdaa-4896-a96e-8b8724150117"
+                        LastKnownName="&quot;OK&quot;"
+                        LastKnownLocation="ModelingMainGUI.uml" />
+                    </objectFlow>
+                  </objectFlowTargets>
+                  <upperBound>
+                    <literalInteger
+                      Id="275180b4-3b25-4d2b-8f50-aa6019df57e5"
+                      name="2147483647"
+                      value="2147483647" />
+                  </upperBound>
+                </outputPin>
+              </opaqueActionHasOutputValues>
+            </pins>
+          </opaqueAction>
           <objectNode
             Id="cca682f5-e39f-484e-adb4-a76cdfd09088"
             name="Data Store"
             isLeaf="false"
             ordering="Unordered"
             isControlType="false">
+            <objectFlowTargets>
+              <objectFlow
+                Id="8a5813fe-0e8d-48a8-99c0-94bdd8fe0631"
+                isLeaf="false"
+                isMulticast="false"
+                isMultireceive="false">
+                <inputPinMoniker
+                  Id="52ac0a8b-bb9a-4173-966f-0ebe99dfa423"
+                  LastKnownName="User Data"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </objectFlow>
+            </objectFlowTargets>
             <upperBound>
               <literalInteger
                 Id="a184ba75-8c48-48cc-8ff3-9ce59a2f42d4"
@@ -110,37 +291,68 @@
             </upperBound>
           </objectNode>
           <opaqueAction
-            Id="38aea407-aecf-4a11-933b-9b3dcb8e7c5c"
-            name="Select Book"
-            isLeaf="false" />
-          <opaqueAction
-            Id="ba6e2d05-1fbb-437b-8ce3-18994542c67e"
-            name="&quot;Add Book&quot;"
-            isLeaf="false" />
-          <opaqueAction
-            Id="5d310b53-397a-4d6b-86db-275980721cba"
-            name="Set Quantity"
-            isLeaf="false" />
-          <opaqueAction
-            Id="bc05c607-3393-47ba-b251-a88493d7c713"
-            name="&quot;Cancel&quot;"
-            isLeaf="false" />
-          <opaqueAction
-            Id="1557086c-35da-48a2-af89-3d3faffc76c9"
-            name="&quot;OK&quot;"
-            isLeaf="false" />
-          <opaqueAction
-            Id="aaa28729-1e21-421c-b46f-1c27fa1d52ff"
-            name="Update List"
-            isLeaf="false" />
-          <opaqueAction
             Id="a57adf5e-798b-4e7a-8c55-d3a1eaa4e82a"
             name="Error Message"
-            isLeaf="false" />
-          <opaqueAction
-            Id="7260ec57-2f98-4f99-8d2c-35325836a669"
-            name="Select Catalog"
-            isLeaf="false" />
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="276093df-2488-4266-8264-e8b47ebb2676"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="c87e4e5d-841f-4350-9f17-58bc220d11a7"
+                  LastKnownName="&quot;Login&quot;"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </opaqueAction>
+          <forkNode
+            Id="89967f9a-23d8-4b69-86f7-2eae4bfd0c5f"
+            name="Fork2"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="eb5ac483-fc4b-45e0-a0f3-121e77f0b957"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="c87e4e5d-841f-4350-9f17-58bc220d11a7"
+                  LastKnownName="&quot;Login&quot;"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="21ffabf6-5dce-43a8-a84f-54326f3755a2"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="6912f666-8b08-4f5c-8ae6-344acccabdfb"
+                  LastKnownName="&quot;Exit&quot;"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </forkNode>
+          <decisionNode
+            Id="53e7cd10-3cdc-4ea7-ac72-4edeae35ca94"
+            name="Decision1"
+            isLeaf="false">
+            <flowNodeTargets>
+              <controlFlow
+                Id="d24df3e9-9d9c-4e57-9f11-5709af767535"
+                guard="invalid"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="c6127e2f-a99f-4e55-9e46-f4ef02412e4b"
+                  LastKnownName="Invalid User"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+              <controlFlow
+                Id="838c76d2-51b0-4105-881c-aa9658e8eab1"
+                guard="valid"
+                isLeaf="false">
+                <opaqueActionMoniker
+                  Id="023d1aca-dc78-461e-b557-bd824394550b"
+                  LastKnownName="View Books"
+                  LastKnownLocation="ModelingMainGUI.uml" />
+              </controlFlow>
+            </flowNodeTargets>
+          </decisionNode>
         </nodes>
       </activity>
     </packageHasNamedElement>

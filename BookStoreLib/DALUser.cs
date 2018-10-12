@@ -15,9 +15,7 @@ namespace BookStoreLib
           //private static string connString = Properties.Settings.Default.ZSDatabaseConnectionString;
           private static string connString = Properties.Settings.Default.XYDatabaseConnectionString; // Use new DB provided for assignment 3
 
-          // Feels awkward to store variables redundantly like this. Aassignment 3
-          // requires the extra DAL class, but also access to variables like the full name
-          // TODO: Talk to Dr Yuan about how strict assignment is on implementation
+          // Store user data redudantly in this layer
           public int Id { get; private set; }
           public string Username { get; private set; }
           public string Password { get; private set; }
