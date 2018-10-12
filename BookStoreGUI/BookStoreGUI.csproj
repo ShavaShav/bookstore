@@ -130,7 +130,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\UnitTestLoginPage\BookStoreLib.csproj">
+    <ProjectReference Include="..\BookStoreLib\BookStoreLib.csproj">
       <Project>{72E00D8B-7B77-41F5-93C8-27DB552EA04B}</Project>
       <Name>BookStoreLib</Name>
     </ProjectReference>
