@@ -34,9 +34,10 @@ namespace BookStoreGUI
                string username = this.usernameTextBox.Text;
                string password = this.passwordTextBox.Password;
 
-               // Attempt login
-               User = new User();
-               if (User.Login(username, password))
+                // Attempt login
+                User = User.Login(username, password);
+
+               if (User.IsLoggedIn)
                {
                     // Logged in succesfully, close.
                     this.DialogResult = true;

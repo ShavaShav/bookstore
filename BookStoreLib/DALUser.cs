@@ -15,20 +15,11 @@ namespace BookStoreLib
           //private static string connString = Properties.Settings.Default.ZSDatabaseConnectionString;
           private static string connString = Properties.Settings.Default.XYDatabaseConnectionString; // Use new DB provided for assignment 3
 
-          // Feels awkward to store variables redundantly like this. Aassignment 3
-          // requires the extra DAL class, but also access to variables like the full name
-          // TODO: Talk to Dr Yuan about how strict assignment is on implementation
-          public int Id { get; private set; }
-          public string Username { get; private set; }
-          public string Password { get; private set; }
-          public string FullName { get; private set; }
-          public string Type { get; private set; }
-          public bool IsManager { get; private set; }
-
-          public bool Login(string username, string password)
+          public User Login(string username, string password)
           {
 
             var conn = new SqlConnection(connString);
+            var user = new User();
             try
             {
                 SqlCommand loginSQL = new SqlCommand
@@ -44,23 +35,25 @@ namespace BookStoreLib
 
                 if (reader.Read())
                 {
-                    Id = (int)reader["Id"];
-                    Username = (string)reader["Username"];
-                    Password = (string)reader["Password"];
-                    FullName = (string)reader["FullName"];
-                    Type = (string)reader["Type"];
-                    IsManager = (bool)reader["Manager"];
-                    return true;
+                    // Success, return the user model
+                    user.Id = (int)reader["Id"];
+                    user.Username = (string)reader["Username"];
+                    user.Password = (string)reader["Password"];
+                    user.FullName = (string)reader["FullName"];
+                    user.Type = (string)reader["Type"];
+                    user.IsManager = (bool)reader["Manager"];
+                    user.IsLoggedIn = true;
                 }
                 else
                 {
-                    return false;
+                    user.ErrorMessages.Add("Incorrect username or password.");
                 }
+
             }
             catch (Exception e)
             {
-                Console.WriteLine(e.ToString());
-                return false;
+                user.ErrorMessages.Add(e.ToString());
+                Console.WriteLine(e.StackTrace);
             }
             finally
             {
@@ -69,6 +62,7 @@ namespace BookStoreLib
                     conn.Close();
                 }
             }
-          }
-     }
+            return user;
+        }
+    }
 }

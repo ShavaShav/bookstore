@@ -20,10 +20,23 @@ namespace BookStoreLib
           public bool IsLoggedIn { set; get; }
           public List<string> ErrorMessages { set; get; }
 
-          // Returns true if successful login
-          public bool Login(string username, string password)
+          public User()
           {
-               ErrorMessages = new List<string>();
+            // Null user
+            this.Id = -1;
+            this.Username = "";
+            this.Password = "";
+            this.FullName = "";
+            this.Type = "";
+            this.IsManager = false;
+            this.IsLoggedIn = false;
+            this.ErrorMessages = new List<string>();
+        }
+
+        // Returns true if successful login
+        public static User Login(string username, string password)
+          {
+               var ErrorMessages = new List<string>();
 
                // Validate username
                if (username == "")
@@ -56,31 +69,15 @@ namespace BookStoreLib
                if (ErrorMessages.Count() > 0)
                {
                     // Validation error (see tests in LoginUnitTest.cs)
-                    this.Id = -1;
-                    return false;
+                    User invalidUser = new User();
+                    invalidUser.ErrorMessages = ErrorMessages;
+                    return invalidUser;
                }
 
                // Attempt login
                DALUser dbUser = new DALUser();
-               this.IsLoggedIn = dbUser.Login(username, password);
-               
-               if (this.IsLoggedIn)
-               {
-                    // Successful login, set user
-                    this.Username = dbUser.Username;
-                    this.Password = dbUser.Password;
-                    this.FullName = dbUser.FullName;
-                    this.Type = dbUser.Type;
-                    this.IsManager = dbUser.IsManager;
-               }
-               else
-               {
-                    // Wrong username/password
-                    this.Id = -1;
-                    ErrorMessages.Add("Incorrect username or password.");
-               }
-
-               return this.IsLoggedIn;
+               return dbUser.Login(username, password);
           }
+
      }
 }
