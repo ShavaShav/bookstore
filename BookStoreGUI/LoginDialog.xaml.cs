@@ -47,8 +47,8 @@ namespace BookStoreGUI
                     // Login failed.
                     MessageBox.Show("Please correct the following errors and try again: \n\n" 
                          + String.Join("\n", User.ErrorMessages));
-                    // TODO: Remove following line? Assignment requires closing window, but would be more user friendly to keep open.
-                    this.Close();
+                    // Uncomment following line? Assignment example closes window, but would be more user friendly to keep open.
+                    // this.Close();
                }
           }
 

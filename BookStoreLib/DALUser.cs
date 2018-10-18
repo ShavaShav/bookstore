@@ -7,24 +7,23 @@ using System.Threading.Tasks;
 
 namespace BookStoreLib
 {
-     /**
-     * Data access object for User table 
-     */
-     public class DALUser
-     {
-          //private static string connString = Properties.Settings.Default.ZSDatabaseConnectionString;
-          private static string connString = Properties.Settings.Default.XYDatabaseConnectionString; // Use new DB provided for assignment 3
+    /**
+    * Data access object for User table 
+    */
+    public class DALUser
+    {
+        private static string connString = Properties.Settings.Default.XYDatabaseConnectionString;
 
-          // Store user data redudantly in this layer
-          public int Id { get; private set; }
-          public string Username { get; private set; }
-          public string Password { get; private set; }
-          public string FullName { get; private set; }
-          public string Type { get; private set; }
-          public bool IsManager { get; private set; }
+        // Store user data redudantly in this layer (talked with Prof Yuan about this)
+        public int Id { get; private set; }
+        public string Username { get; private set; }
+        public string Password { get; private set; }
+        public string FullName { get; private set; }
+        public string Type { get; private set; }
+        public bool IsManager { get; private set; }
 
-          public bool Login(string username, string password)
-          {
+        public bool Login(string username, string password)
+        {
 
             var conn = new SqlConnection(connString);
             try
@@ -67,6 +66,6 @@ namespace BookStoreLib
                     conn.Close();
                 }
             }
-          }
-     }
+        }
+    }
 }
