@@ -30,7 +30,7 @@ namespace BookStoreLib
                 dsBooks = new DataSet("Books");
                 daCatagory.Fill(dsBooks, "Category");            //Get category info
                 String strSQL2 = "Select ISBN, CategoryID, Title," +
-                    "Author, Price, Year, Edition, Publisher from BookData";
+                    "Author, Price, Year, Edition, Publisher from Book";
                 SqlCommand cmdSelBook = new SqlCommand(strSQL2, conn);
                 SqlDataAdapter daBook = new SqlDataAdapter(cmdSelBook);
                 daBook.Fill(dsBooks, "Books");                  //Get Books info

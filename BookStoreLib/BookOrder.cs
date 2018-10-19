@@ -44,19 +44,12 @@ namespace BookStoreLib
         }
         public double GetOrderTotal()
         {
-            if (orderItemList.Count == 0)
+            double total = 0;
+            foreach (var item in orderItemList)
             {
-                return 0.00;
+                total += item.SubTotal;
             }
-            else
-            {
-                double total = 0;
-                foreach (var item in orderItemList)
-                {
-                    total += item.SubTotal;
-                }
-                return total;
-            }
+            return total;
         }
         public int PlaceOrder(int userID)
         {

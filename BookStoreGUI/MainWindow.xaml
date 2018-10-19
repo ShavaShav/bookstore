@@ -7,76 +7,77 @@
         mc:Ignorable="d"
         Title="ZS's BookStore" Height="600" Width="800" Loaded="Window_Loaded">
     <Grid>
-          <Grid.RowDefinitions>
-               <RowDefinition/>
-               <RowDefinition Height="30"/>
-          </Grid.RowDefinitions>
-          <Grid.ColumnDefinitions>
-               <ColumnDefinition />
-          </Grid.ColumnDefinitions>
-          <Grid x:Name="layoutRoot" Margin="15" DataContext="{Binding}">
-               <Grid.RowDefinitions>
-                    <RowDefinition Height="40"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="30"/>
-               </Grid.RowDefinitions>
-               <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-               </Grid.ColumnDefinitions>
-               <Grid Margin="10,0,0,10" >
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                         <Label Content="Categories" VerticalAlignment="Center"/>
-                         <ComboBox x:Name="comboBoxCategories" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name" VerticalAlignment="Center" Height="24" MinWidth="200">
-                              <ComboBox.ItemsPanel>
-                                   <ItemsPanelTemplate>
-                                        <VirtualizingStackPanel />
-                                   </ItemsPanelTemplate>
-                              </ComboBox.ItemsPanel>
-                         </ComboBox>
-                    </StackPanel>
-                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                         <Button x:Name="buttonLogin" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,10,0"/>
-                         <Button x:Name="buttonExit" Content="Exit" Click="ExitButton_Click" VerticalAlignment="Center" Width="60" Padding="5"/>
-                    </StackPanel>
-               </Grid>
-               <Border Background="#FFEEEEEE"  BorderBrush="#FF151515" BorderThickness="1" Grid.Row="1" Margin="0,0,0,10">
-                    <DataGrid x:Name="dataGridBooks" ItemsSource="{Binding drCat_Book}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" VerticalAlignment="Top" AutoGenerateColumns="False" BorderThickness="0">
-                         <DataGrid.Columns>
-                              <DataGridTextColumn Header="Title" Width="50*" Binding="{Binding Title}" />
-                              <DataGridTextColumn Header="Author" Width="18*" Binding="{Binding Author}"/>
-                              <DataGridTextColumn Header="Price" Width="12*" Binding="{Binding Price}"/>
-                              <DataGridTextColumn Header="Year" Width="8*" Binding="{Binding Year}" />
-                         </DataGrid.Columns>
-                    </DataGrid>
-               </Border>
-               <Border Background="Transparent"  BorderBrush="#FF151515" BorderThickness="1" Grid.Row="2" Margin="0,0,0,10">
-                    <StackPanel>
-                         <ListView x:Name="listViewOrders" Margin="0" BorderThickness="0" SelectionChanged="listViewOrders_SelectionChanged" >
-                              <ListView.ItemContainerStyle>
-                                   <Style TargetType="ListViewItem">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
-                                   </Style>
-                              </ListView.ItemContainerStyle>
-                              <ListView.View >
-                                   <GridView>
-                                        <!-- Find a way to stretch columns dynamically. Maybe use a DataGrid for this instead. -->
-                                        <GridViewColumn Header="ISBN"  DisplayMemberBinding="{Binding BookID}" Width="150"/>
-                                        <GridViewColumn Header="Title" DisplayMemberBinding="{Binding BookTitle}" Width="410"/>
-                                        <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
-                                        <GridViewColumn Header="Subtotal" DisplayMemberBinding="{Binding Subtotal}"  Width="100"/>
-                                   </GridView>
-                              </ListView.View>
-                         </ListView>
-                    </StackPanel>
-               </Border>
-               <Grid Grid.Row="3">
-                    <Button x:Name="buttonAddBook" Content="Add Book" Click="AddBookButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Left"/>
-                    <Button x:Name="buttonCheckout" Content="Proceed to Checkout" Click="CheckoutButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
-               </Grid>
-          </Grid>
-          <StatusBar Grid.Row="1" HorizontalAlignment="Stretch">
-               <TextBlock x:Name="textBlockStatus"><Run Text="Please login before proceeding to checkout."/></TextBlock>
-          </StatusBar>
-     </Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="30"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid x:Name="layoutRoot" Margin="15" DataContext="{Binding}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition Height="30"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid Margin="10,0,0,10" >
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                    <Label Content="Categories" VerticalAlignment="Center"/>
+                    <ComboBox x:Name="comboBoxCategories" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name" VerticalAlignment="Center" Height="24" MinWidth="200">
+                        <ComboBox.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <VirtualizingStackPanel />
+                            </ItemsPanelTemplate>
+                        </ComboBox.ItemsPanel>
+                    </ComboBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="buttonLogin" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,10,0"/>
+                    <Button x:Name="buttonExit" Content="Exit" Click="ExitButton_Click" VerticalAlignment="Center" Width="60" Padding="5"/>
+                </StackPanel>
+            </Grid>
+            <Border Background="#FFEEEEEE"  BorderBrush="#FF151515" BorderThickness="1" Grid.Row="1" Margin="0,0,0,10">
+                <DataGrid x:Name="dataGridBooks" ItemsSource="{Binding drCat_Book}" RowDetailsVisibilityMode="VisibleWhenSelected" SelectionMode="Single" VerticalAlignment="Top" AutoGenerateColumns="False" BorderThickness="0">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Title" Width="50*" Binding="{Binding Title}" />
+                        <DataGridTextColumn Header="Author" Width="18*" Binding="{Binding Author}"/>
+                        <DataGridTextColumn Header="Price" Width="12*" Binding="{Binding Price}"/>
+                        <DataGridTextColumn Header="Year" Width="8*" Binding="{Binding Year}" />
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Border>
+            <Border Background="Transparent"  BorderBrush="#FF151515" BorderThickness="1" Grid.Row="2" Margin="0,0,0,10">
+                <StackPanel>
+                    <ListView x:Name="listViewOrders" Margin="0" BorderThickness="0" SelectionChanged="listViewOrders_SelectionChanged" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View >
+                            <GridView>
+                                <!-- Find a way to stretch columns dynamically. Maybe use a DataGrid for this instead. -->
+                                <GridViewColumn Header="ISBN"  DisplayMemberBinding="{Binding BookID}" Width="150"/>
+                                <GridViewColumn Header="Title" DisplayMemberBinding="{Binding BookTitle}" Width="410"/>
+                                <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
+                                <GridViewColumn Header="Subtotal" DisplayMemberBinding="{Binding Subtotal}"  Width="100"/>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </StackPanel>
+            </Border>
+            <Grid Grid.Row="3">
+                <Button x:Name="buttonAddBook" Content="Add Book" Click="AddBookButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Left"/>
+                <Button x:Name="buttonRemoveBook" Content="Remove Book" Click="RemoveBookButton_Click" VerticalAlignment="Bottom" Padding="10,5" HorizontalAlignment="Left" Margin="88,0,0,1"/>
+                <Button x:Name="buttonCheckout" Content="Proceed to Checkout" Click="CheckoutButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+            </Grid>
+        </Grid>
+        <StatusBar Grid.Row="1" HorizontalAlignment="Stretch">
+            <TextBlock x:Name="textBlockStatus"><Run Text="Please login before proceeding to checkout."/></TextBlock>
+        </StatusBar>
+    </Grid>
 </Window>

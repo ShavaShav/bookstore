@@ -36,8 +36,13 @@ namespace BookStoreGUI
         {
             BookCatalog bookCat = new BookCatalog();
             DsBookCat = bookCat.GetBookInfo();
+            Console.WriteLine(DsBookCat.ToString());
+
             this.DataContext = DsBookCat.Tables["Category"];
+            
+
             bookOrder = new BookOrder();
+            User = new User();
             this.listViewOrders.ItemsSource = bookOrder.OrderItemList;
         }
 
@@ -67,9 +72,35 @@ namespace BookStoreGUI
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)
         {
+            // Check if row selected
+            if (this.dataGridBooks.SelectedItems.Count < 1)
+            {
+                this.textBlockStatus.Text = "You must select a book before adding.";
+                return;
+            }
+
+            // An empty row that is selected will return something other than a DataRowView (why god why?)
+            if (!(this.dataGridBooks.SelectedItems[0] is System.Data.DataRowView))
+            {
+                this.textBlockStatus.Text = "Row is empty. Must select a valid book..";
+                return;
+            }
+
+            // Selected row is valid.
+            DataRowView selectedRow = (DataRowView)this.dataGridBooks.SelectedItems[0];
+
+            // Check if selected row has empty fields
+            for (int i = 0; i < selectedRow.Row.ItemArray.Count(); i++)
+            {
+                if (selectedRow.Row.IsNull(i))
+                {
+                    this.textBlockStatus.Text = "Cannot add a book with empty fields.";
+                    return;
+                }
+            }
+
+            // Create book order from the chosen book and user input
             OrderItemDialog orderItemDialog = new OrderItemDialog();
-            DataRowView selectedRow;
-            selectedRow = (DataRowView)this.dataGridBooks.SelectedItems[0];
             orderItemDialog.isbnTextBox.Text = selectedRow.Row.ItemArray[0].ToString();
             orderItemDialog.titleTextBox.Text = selectedRow.Row.ItemArray[2].ToString();
             orderItemDialog.priceTextBox.Text = selectedRow.Row.ItemArray[4].ToString();
@@ -85,12 +116,15 @@ namespace BookStoreGUI
             }
         }
 
-        private void RemoveButton_Click(object sender, RoutedEventArgs e)
+        private void RemoveBookButton_Click(object sender, RoutedEventArgs e)
         {
             if (this.listViewOrders.SelectedItem != null)
             {
                 var selectedOrderItem = this.listViewOrders.SelectedItem as OrderItem;
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
+            } else
+            {
+                this.textBlockStatus.Text = "Please select a book to remove from orders.";
             }
         }
 
