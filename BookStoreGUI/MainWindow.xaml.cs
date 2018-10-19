@@ -75,14 +75,14 @@ namespace BookStoreGUI
             // Check if row selected
             if (this.dataGridBooks.SelectedItems.Count < 1)
             {
-                this.textBlockStatus.Text = "You must select a book before adding.";
+                MessageBox.Show("You must select a book before adding.");
                 return;
             }
 
             // An empty row that is selected will return something other than a DataRowView (why god why?)
             if (!(this.dataGridBooks.SelectedItems[0] is System.Data.DataRowView))
             {
-                this.textBlockStatus.Text = "Row is empty. Must select a valid book..";
+                MessageBox.Show("Row is empty. Must select a valid book..");
                 return;
             }
 
@@ -94,7 +94,7 @@ namespace BookStoreGUI
             {
                 if (selectedRow.Row.IsNull(i))
                 {
-                    this.textBlockStatus.Text = "Cannot add a book with empty fields.";
+                    MessageBox.Show("Cannot add a book with empty fields.");
                     return;
                 }
             }
@@ -124,16 +124,30 @@ namespace BookStoreGUI
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
             } else
             {
-                this.textBlockStatus.Text = "Please select a book to remove from orders.";
+                MessageBox.Show("Please select a book to remove from orders.");
             }
         }
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
+            if (!User.IsLoggedIn)
+            {
+                MessageBox.Show("You must be logged in to place an order.");
+                return;
+            }
+
+            if (this.listViewOrders.Items.Count < 1)
+            {
+                MessageBox.Show("Order list is empty. Please add a book before checking out.");
+                return;
+            }
+
             int orderId;
             orderId = bookOrder.PlaceOrder(User.Id);
-            MessageBox.Show("Your order has been placed. Your order id is " +
-            orderId.ToString());
+            MessageBox.Show("Your order has been placed. Your order id is " + orderId.ToString());
+
+            // Start a new order
+            bookOrder = new BookOrder();
         }
     }
 }

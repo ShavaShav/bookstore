@@ -29,11 +29,19 @@ namespace BookStoreGUI
         }
         private void okButton_Click(object sender, RoutedEventArgs e)
         {
-            this.DialogResult = true;
+            if (int.Parse(this.quantityTextBox.Text) < 1) {
+                // Invalid quantity, allow user to fix.
+                MessageBox.Show("Please enter a positive value for quantity.");
+            } else {
+                // valid 
+                this.DialogResult = true;
+                this.Close();
+            }
         }
         private void cancelButton_Click(object sender, RoutedEventArgs e)
         {
             this.DialogResult = false;
+            this.Close();
         }
     }
 }
