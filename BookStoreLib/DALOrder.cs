@@ -17,7 +17,7 @@ namespace BookStoreLib
         public int Proceed2Order(string xmlOrder)
         {
             SqlConnection cn = new SqlConnection(
-                Properties.Settings.Default.XYDatabaseConnectionString);
+                Properties.Settings.Default.DatabaseConnectionString);
             try
             {
                 SqlCommand cmd = cn.CreateCommand();

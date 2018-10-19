@@ -26,22 +26,11 @@ namespace BookStoreLib.Properties {
         [global::System.Configuration.ApplicationScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Zach\\Repos\\visual-studio\\B" +
-            "ookStore\\zsBookstoreDB.mdf;Integrated Security=True;Connect Timeout=30")]
-        public string ZSDatabaseConnectionString {
+        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=tfs.cspc1.uwindsor.ca;Initial Catalog=PrefaceBookStoreDB18;User ID=Pr" +
+            "efaceBookStoreDB18;Password=PrefaceBookStoreDB18")]
+        public string DatabaseConnectionString {
             get {
-                return ((string)(this["ZSDatabaseConnectionString"]));
-            }
-        }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=(LocalDB)\\MSSQLLocalDB;AttachDbFilename=E:\\Zach\\Repos\\visual-studio\\B" +
-            "ookStore\\xyBookstoreDB.mdf;Integrated Security=True;Connect Timeout=30")]
-        public string XYDatabaseConnectionString {
-            get {
-                return ((string)(this["XYDatabaseConnectionString"]));
+                return ((string)(this["DatabaseConnectionString"]));
             }
         }
     }
