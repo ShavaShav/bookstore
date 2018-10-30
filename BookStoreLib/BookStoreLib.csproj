@@ -67,6 +67,7 @@
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="TestRemoveBook.cs" />
+    <Compile Include="TestSetup.cs" />
     <Compile Include="User.cs" />
     <Compile Include="DALUser.cs" />
   </ItemGroup>
@@ -79,7 +80,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="db_create.sql" />
+    <Content Include="db_create.sql">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="PrefaceBookStoreDB.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
