@@ -58,5 +58,11 @@ namespace BookStoreGUI
                this.DialogResult = false;
                this.Close();
           }
-     }
+
+        private void OnRegisterButtonClicked(object sender, RoutedEventArgs e)
+        {
+            UserRegisterDialog dlg = new UserRegisterDialog();
+            dlg.Show();
+        }
+    }
 }
