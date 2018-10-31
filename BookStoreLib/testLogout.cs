@@ -7,18 +7,24 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace BookStoreLib
 {
-    class testLogout
+    [TestClass]
+    public class TestLogout
     {
         // Test Case #1
         [TestMethod]
         public void LogoutSuccess()
         {
-            bool expectedLogoutVal = true;
+            // login
             User testUser = new User();
+            testUser.Login("shaverz", "zs1234");
+            Assert.IsTrue(testUser.IsLoggedIn);
+
+            int expectedId = -1;
+
+            // logout
             testUser.logout();
-            bool actualVal = testUser.IsLoggedIn;
-            // Assert on results
-            Assert.AreEqual(actualVal, expectedLogoutVal);
+            Assert.IsFalse(testUser.IsLoggedIn);
+            Assert.AreEqual(testUser.Id, expectedId);
         }
     }
 }

@@ -73,11 +73,13 @@ namespace BookStoreGUI
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             //to clear out the whole Main Window fields such as categories, books, and orders.
-            comboBoxCategories.SelectedItem = -1;
-            dataGridBooks.Items.Clear();
-            listViewOrders.Items.Clear();
-            User.logout();
-            this.textBlockStatus.Text = "You are logged out." ;
+            if (User.logout())
+            {
+                categoriesComboBox.SelectedItem = -1;
+                dataGridBooks.Items.Clear();
+                listViewOrders.Items.Clear();
+                this.textBlockStatus.Text = "You are logged out.";
+            }
         }
 
         private void AddBookButton_Click(object sender, RoutedEventArgs e)

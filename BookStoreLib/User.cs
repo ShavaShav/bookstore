@@ -84,9 +84,21 @@ namespace BookStoreLib
             return this.IsLoggedIn;
         }
 
-        public void logout()
+        public bool logout()
         {
-            if (IsLoggedIn) IsLoggedIn = false;
+            if (IsLoggedIn)
+            {
+                // Nullify user
+                this.Id = -1;
+                this.Username = "";
+                this.Password = "";
+                this.FullName = "";
+                this.Type = "";
+                this.IsManager = false;
+                this.IsLoggedIn = false;
+            }
+
+            return !this.IsLoggedIn; // true if logged out
         }
 
     }
