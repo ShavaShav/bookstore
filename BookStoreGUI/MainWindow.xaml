@@ -27,7 +27,7 @@
             <Grid Margin="10,0,0,10" >
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                     <Label Content="Categories" VerticalAlignment="Center"/>
-                    <ComboBox x:Name="comboBoxCategories" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name" VerticalAlignment="Center" Height="24" MinWidth="200">
+                    <ComboBox ItemsSource="{Binding}" x:Name="categoriesComboBox" IsSynchronizedWithCurrentItem="True" DisplayMemberPath="Name" VerticalAlignment="Center" Height="24" MinWidth="200">
                         <ComboBox.ItemsPanel>
                             <ItemsPanelTemplate>
                                 <VirtualizingStackPanel />
@@ -64,7 +64,7 @@
                                 <GridViewColumn Header="ISBN"  DisplayMemberBinding="{Binding BookID}" Width="150"/>
                                 <GridViewColumn Header="Title" DisplayMemberBinding="{Binding BookTitle}" Width="410"/>
                                 <GridViewColumn Header="Quantity" DisplayMemberBinding="{Binding Quantity}" Width="100"/>
-                                <GridViewColumn Header="Subtotal" DisplayMemberBinding="{Binding Subtotal}"  Width="100"/>
+                                <GridViewColumn Header="Subtotal" DisplayMemberBinding="{Binding SubTotal}"  Width="100"/>
                             </GridView>
                         </ListView.View>
                     </ListView>

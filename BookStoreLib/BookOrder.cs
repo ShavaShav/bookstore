@@ -21,15 +21,24 @@ namespace BookStoreLib
         }
         public void AddItem(OrderItem orderItem)
         {
+            OrderItem changedItem = null, oldItem = null;
             foreach (var item in orderItemList)
             {
                 if (item.BookID == orderItem.BookID)
                 {
+                    oldItem = item;
                     item.Quantity += orderItem.Quantity;
-                    return;
+                    item.SubTotal += orderItem.SubTotal;
+                    changedItem = item;
                 }
             }
-            orderItemList.Add(orderItem);
+            if (oldItem != null)
+            {
+                orderItemList.Remove(oldItem);
+                orderItemList.Add(changedItem);
+            }
+            else
+                orderItemList.Add(orderItem);
         }
         public void RemoveItem(string productID)
         {
