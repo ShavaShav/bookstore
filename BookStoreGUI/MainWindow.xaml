@@ -74,6 +74,8 @@
                 <Button x:Name="buttonAddBook" Content="Add Book" Click="AddBookButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Left"/>
                 <Button x:Name="buttonRemoveBook" Content="Remove Book" Click="RemoveBookButton_Click" VerticalAlignment="Bottom" Padding="10,5" HorizontalAlignment="Left" Margin="88,0,0,1"/>
                 <Button x:Name="buttonCheckout" Content="Proceed to Checkout" Click="CheckoutButton_Click" VerticalAlignment="Center" Padding="10,5" HorizontalAlignment="Right" HorizontalContentAlignment="Center"/>
+                <TextBox x:Name="totalPrice" IsReadOnly="True" HorizontalAlignment="Left" Height="29" Margin="235,0,0,1" TextWrapping="Wrap" Text="$0" VerticalAlignment="Center" Width="120"/>
+                <Label x:Name="totatlPriceLabel" Content="Total:" HorizontalAlignment="Left" Margin="200,0,0,1" VerticalAlignment="Top"/>
             </Grid>
         </Grid>
         <StatusBar Grid.Row="1" HorizontalAlignment="Stretch">

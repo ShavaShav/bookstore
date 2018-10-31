@@ -113,6 +113,7 @@ namespace BookStoreGUI
                 double unitPrice = double.Parse(orderItemDialog.priceTextBox.Text);
                 int quantity = int.Parse(orderItemDialog.quantityTextBox.Text);
                 bookOrder.AddItem(new OrderItem(isbn, title, unitPrice, quantity));
+                updateTotal();
             }
         }
 
@@ -122,10 +123,21 @@ namespace BookStoreGUI
             {
                 var selectedOrderItem = this.listViewOrders.SelectedItem as OrderItem;
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
+                updateTotal();
             } else
             {
                 MessageBox.Show("Please select a book to remove from orders.");
             }
+        }
+
+        //updates the running total price
+        private void updateTotal()
+        {
+            // TODO: set total field with bookOrgder.getTotal()
+            double total = 0.0;
+            total = bookOrder.GetOrderTotal();
+            totalPrice.Text = total.ToString();
+            return;
         }
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
