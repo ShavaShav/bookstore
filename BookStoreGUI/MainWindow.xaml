@@ -36,7 +36,6 @@
                     </ComboBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="buttonLogout" Content="Logout" Click="LogoutButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,5,0"/>
                     <Button x:Name="buttonLogin" Content="Login" Click="LoginButton_Click" VerticalAlignment="Center" Width="60" Padding="5" Margin="0,0,10,0"/>
                     <Button x:Name="buttonExit" Content="Exit" Click="ExitButton_Click" VerticalAlignment="Center" Width="60" Padding="5"/>
                 </StackPanel>
