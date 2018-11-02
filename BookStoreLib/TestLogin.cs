@@ -12,6 +12,9 @@ namespace BookStoreLib
           public void SetUp()
           {
                // Set up logic
+               // TODO: Delete test database and run the sql setup script here,
+               // so that we have a fresh instance of the database for each test.
+               // Create the test user that we will assert our login methods on.
           }
 
           [TestCleanup]

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace BookStoreLib
 {
     /**
@@ -13,6 +14,7 @@ namespace BookStoreLib
     public class DALUser
     {
         private static string connString = Properties.Settings.Default.DatabaseConnectionString;
+        
 
         // Store user data redudantly in this layer (talked with Prof Yuan about this)
         public int Id { get; private set; }
