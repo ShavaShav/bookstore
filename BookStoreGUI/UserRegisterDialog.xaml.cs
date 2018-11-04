@@ -18,7 +18,7 @@ namespace BookStoreGUI
 
         private const String phonePattern = @"^\(?([0-9]{3})\)?[-.● ]?([0-9]{3})[-.●]?([0-9]{4})$";
 
-        private const String postalCodePattern = @"[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]";
+        private const String postalCodePattern = @"[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]";//only canadian postal code check for now.
 
         private const String numberFilter = @"[^\d]";
 
