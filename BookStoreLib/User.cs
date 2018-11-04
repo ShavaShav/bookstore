@@ -65,5 +65,22 @@ namespace BookStoreLib
         {
             this.Id = id;
         }
+
+        public new string ToString()
+        {
+            String returnString =
+                "Username: " + Username + "\n" +
+                "First Name: " + FirstName + "\n" +
+                "Last Name: " + LastName + "\n" +
+                "Email: " + Email + "\n" +
+                "Phone: " + Phone + "\n" +
+                "Address 1: " + AddressLine1 + "\n" +
+                "Address 2: " + AddressLine2 + "\n" +
+                "City: " + City + "\n" +
+                "Province: " + Province + "\n" +
+                "Postal Code: " + PostalCode + "\n";
+
+            return returnString;
+        }
     } //end User Body
 }//end namespace
