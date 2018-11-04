@@ -32,7 +32,7 @@
                     Grid.Row="2" Grid.Column="0" />
                 
                 <TextBox
-                    x:Name="UsernameBox"
+                    x:Name="UsernameBox" CharacterCasing="Lower"
                     Grid.Row="0" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
                 
                 <PasswordBox
