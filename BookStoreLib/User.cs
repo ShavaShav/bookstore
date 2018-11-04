@@ -30,9 +30,11 @@ namespace BookStoreLib
         public string Province { get; set; }
         public string PostalCode { get; set; }
 
-        public User(string username, string email, string phone, string addressLine1, string addressLine2, string city, string province, string postalCode)
+        public User(string username, string firstname, string lastname, string email, string phone, string addressLine1, string addressLine2, string city, string province, string postalCode)
         {
             this.Username = username;
+            this.FirstName = firstname;
+            this.LastName = lastname;
             this.Email = email;
             this.Phone = phone;
             this.AddressLine1 = addressLine1;
@@ -59,5 +61,9 @@ namespace BookStoreLib
             return !this.IsLoggedIn; // true if logged out
         }
 
-    } //end User Body     
+        public void setUserId(int id)
+        {
+            this.Id = id;
+        }
+    } //end User Body
 }//end namespace

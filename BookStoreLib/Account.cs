@@ -6,38 +6,49 @@ using System.Threading.Tasks;
 
 namespace BookStoreLib
 {
-    class Account
+    public static class Account
     {
-
-
+        public static bool IsLoggedIn;
+        public static List<string> ErrorMessages = new List<string>();
+        public static User currentUser = null;
 
         // Returns true if successful login
-        public static bool Login(string username, string password)
+        public static void Login(string username, string password)
         {
+            if (!isValidPassword(password)) return;
             // Attempt login
             DALUser dbUser = new DALUser();
-            this.IsLoggedIn = dbUser.Login(username, password);
+            currentUser = dbUser.Login(username, password);
 
-            if (this.IsLoggedIn)
-            {
-                // Successful login, set user
-                this.Username = dbUser.Username;
-                this.Password = dbUser.Password;
-                this.FullName = dbUser.FullName;
-                this.Type = dbUser.Type;
-                this.IsManager = dbUser.IsManager;
-            }
-            else
-            {
-                // Wrong username/password
-                this.Id = -1;
-                ErrorMessages.Add("Incorrect username or password.");
-            }
-
-            return this.IsLoggedIn;
+            // dbUser's login function sets currentUser to a user object if login was successful.
+            IsLoggedIn = (currentUser == null) ? false : true;
         }
 
-        private bool isValidPassword(string password)
+        /* Function Register:
+         * 
+         * Inputs: 
+         *  - A User object containing the user to be registered
+         *  - A string containing the password
+         *  
+         * Outputs:
+         *  - Returns a user object if registration is successful, null if registration fails
+         * 
+         */ 
+        public static User Register(User user, string password)
+        {
+            // Check if password is valid
+            if (!isValidPassword(password)) return null;
+
+            // Create a DALUser object and call the Register() function
+            // If registration is successful, return the user object
+            DALUser dbUser = new DALUser();
+            if (dbUser.Register(user, password))
+                return user;
+
+            else return null;
+        }
+
+        private static bool isValidPassword(string password)
         {
             ErrorMessages.Clear();
 
@@ -47,11 +58,11 @@ namespace BookStoreLib
 
             // If first letter is not a letter
             if (!char.IsLetter(password[0]))
-                ErrorMessages.Add("Password has to start with a letter");
+                ErrorMessages.Add("Password does not start with a letter");
 
             // If string contains characters that are not letters or digits
             if (!password.All(Char.IsLetterOrDigit))
-                ErrorMessages.Add("Password cannot contain non-alphanumeric characters");
+                ErrorMessages.Add("Password contains non-alphanumeric characters");
 
             // If password does not contain both letters and numbers
             var containsDigits = false;
@@ -64,40 +75,11 @@ namespace BookStoreLib
             }
 
             if (!containsLetters || !containsDigits)
-                ErrorMessages.Add("Password should contain both letters and digits");
+                ErrorMessages.Add("Password should contain both letters and numbers");
 
             // Else, return true
             return ErrorMessages.Count == 0;
         }
-
-        public static bool Register(
-            string username,
-            string password,
-            string firstName,
-            string lastName,
-            string email,
-            string phone,
-            string addressLine1,
-            string addressLine2,
-            string city,
-            string province,
-            string postalCode)
-        {
-            throw new NotImplementedException();
-        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
-}
+

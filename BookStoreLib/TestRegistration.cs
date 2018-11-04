@@ -7,19 +7,6 @@ namespace BookStoreLib
     [TestClass]
     public class TestRegistration
     {
-        // Sample inputs for Register() function, since it takes a lot of parameters
-        string sampleUsername = "jdoe";
-        string samplePassword = "pwd12345";
-        string sampleFirstName = "John";
-        string sampleLastName = "Doe";
-        string sampleEmail = "jdoe@example.com";
-        string samplePhone = "2656546565";
-        string sampleAddressLine1 = "123 Address Street";
-        string sampleAddressLine2 = null;
-        string sampleCity = "Windsor";
-        string sampleProvince = "ON";
-        string samplePostalCode = "A1B2C3";
-
         [TestInitialize]
         public void SetUp()
         {
@@ -53,39 +40,46 @@ namespace BookStoreLib
         public void RegisterSuccess()
         {
             // Inputs
-            string username = "newUser",
-                 email = "newUser@gmail.com",
-                 password = "nu1234";
+            string 
+                username = "newUser",
+                password = "nu1234";
+
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs for register()
             Boolean expectedRegisterReturn = true;
             // Can't assert on ID unless we have a clean DB
 
             // Create a fresh user, execute register method
-            Account newUser = new Account();
-            Boolean actualRegisterReturn = newUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User newUser = null;
+            bool actualRegisterReturn;
+            try
+            {
+                newUser = Account.Register(sampleUser, password);
+                actualRegisterReturn = (newUser == null) ? false : true;
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.ToString());
+                actualRegisterReturn = false;
+            }
 
-            // Assert on results
+            // Assert on results: if actualRegisterReturn is true, it means that Registration was successful
             Assert.AreEqual(expectedRegisterReturn, actualRegisterReturn);
-            Assert.AreEqual(username, newUser.Username); // username
-            Assert.AreEqual(email, newUser.Email);       // email
-            Assert.AreEqual(password, newUser.Password); // password
-            // TODO: Add other fields
 
             // Expected outputs for subsequent login()
             Boolean expectedLoginReturn = true;
             int expectedUserId = newUser.Id;
 
             // Create a fresh user, execute register method
-            Account loginUser = new Account();
-            Boolean loginReturn = loginUser.Login(username, password);
+            Account.Login(username, password);
 
             // Assert login kept the same user.
-            Assert.AreEqual(expectedLoginReturn, loginReturn);
-            Assert.AreEqual(expectedUserId, loginUser.Id);
+            Assert.AreEqual(expectedLoginReturn, Account.IsLoggedIn);
+            Assert.AreEqual(expectedUserId, Account.currentUser.Id);
 
             // Clean up registered user, or test will fail next time.
             // TODO: We should reset database on each test run, see TestInitialize
@@ -96,125 +90,110 @@ namespace BookStoreLib
         public void RegisterUniqueEmail()
         {
             // Inputs
-            string username = "newUser",
-                 email = "shaverz@uwindsor.ca", // Assumes shaverz@uwindsor.ca in db
-                 password = "ns1234";
+            string password = "ns1234";
+
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "shaverz@uwindsor.ca",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
-            Boolean expectedReturn = false;
-            int expectedUserId = -1;
+            User expectedReturn = null;
 
             // Create a fresh user, execute register method
-            Account testUser = new Account();
-            Boolean actualReturn = testUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User testUser = Account.Register(sampleUser, password);
 
             // Assert on results
-            Assert.AreEqual(expectedReturn, actualReturn);
-            Assert.AreEqual(expectedUserId, testUser.Id);
-            Assert.IsTrue(testUser.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
+            Assert.AreEqual(expectedReturn, testUser);
+            Assert.IsTrue(Account.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
         }
 
         [TestMethod]
         public void RegisterUniqueUsername()
         {
             // Inputs
-            string username = "shaverz",  // Assumes shaverz in db
-                 email = "newUser@gmail.com",
-                 password = "ns1234";
+            string password = "ns1234";
+
+            User sampleUser = new User(
+            "shaverz", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
-            Boolean expectedReturn = false;
-            int expectedUserId = -1;
+            User expectedReturn = null;
 
             // Create a fresh user, execute register method
-            Account testUser = new Account();
-            Boolean actualReturn = testUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User testUser = Account.Register(sampleUser, password);
 
             // Assert on results
-            Assert.AreEqual(expectedReturn, actualReturn);
-            Assert.AreEqual(expectedUserId, testUser.Id);
-            Assert.IsTrue(testUser.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
+            Assert.AreEqual(expectedReturn, testUser);
+            Assert.IsTrue(Account.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
         }
 
         [TestMethod]
         public void RegisterShortPassword()
         {
             // Inputs
-            string username = "newUser",
-                 email = "newUser@gmail.com",
-                 password = "ns12";
+            string password = "ns12";
+
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
-            Boolean expectedReturn = false;
-            int expectedUserId = -1;
+            User expectedReturn = null;
 
             // Create a fresh user, execute login method
-            Account testUser = new Account();
-            Boolean actualReturn = testUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User testUser = Account.Register(sampleUser, password);
 
             // Assert on results
-            Assert.AreEqual(expectedReturn, actualReturn);
-            Assert.AreEqual(expectedUserId, testUser.Id);
-            Assert.IsTrue(testUser.ErrorMessages.Contains("Password must be at least 6 characters."));
+            Assert.AreEqual(expectedReturn, testUser);
+            Assert.IsTrue(Account.ErrorMessages.Contains("Password must be at least 6 characters."));
         }
 
         [TestMethod]
         public void RegisterPasswordStartWithLetter()
         {
             // Inputs
-            string username = "newUser",
-                 email = "newUser@gmail.com",
-                 password = "1234rs";
+            string password = "1234rs";
+
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
-            Boolean expectedReturn = false;
-            int expectedUserId = -1;
+            User expectedReturn = null;
 
             // Create a fresh user, execute login method
-            Account testUser = new Account();
-            Boolean actualReturn = testUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User testUser = Account.Register(sampleUser, password);
 
             // Assert on results
-            Assert.AreEqual(expectedReturn, actualReturn);
-            Assert.AreEqual(expectedUserId, testUser.Id);
-            Assert.IsTrue(testUser.ErrorMessages.Contains("Password must start with an alphabetical character."));
+            Assert.AreEqual(expectedReturn, testUser);
+            Assert.IsTrue(Account.ErrorMessages.Contains("Password must start with an alphabetical character."));
         }
 
         [TestMethod]
         public void RegisterPasswordContainsOnlyAlphaNumberic()
         {
             // Inputs
-            string username = "newUser",
-                 email = "newUser@gmail.com",
-                 password = "ns1234@";
+            string password = "ns1234@";
+
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
-            Boolean expectedReturn = false;
-            int expectedUserId = -1;
+            User expectedReturn = null;
 
             // Create a fresh user, execute register method
-            Account testUser = new Account();
-            Boolean actualReturn = testUser.Register(
-                username, password, sampleFirstName, sampleLastName, email,
-                samplePhone, sampleAddressLine1, sampleAddressLine2, sampleCity,
-                sampleProvince, samplePostalCode);
+            User testUser = Account.Register(sampleUser, password);
 
             // Assert on results
-            Assert.AreEqual(expectedReturn, actualReturn);
-            Assert.AreEqual(expectedUserId, testUser.Id);
-            Assert.IsTrue(testUser.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
+            Assert.AreEqual(expectedReturn, testUser);
+            Assert.IsTrue(Account.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
         }
     }
 }

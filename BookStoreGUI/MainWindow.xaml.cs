@@ -54,6 +54,8 @@ namespace BookStoreGUI
             this.DataContext = DsBookCat.Tables["Category"];
 
             // Intialize book order context (resets order table)
+            bookOrder = new BookOrder();
+            User = Account.currentUser;
             this.listViewOrders.ItemsSource = bookOrder.OrderItemList;
 
             // Intialize status bar message
@@ -75,7 +77,7 @@ namespace BookStoreGUI
             {
                 // Login successful
                 User = loginDialog.User;
-                this.textBlockStatus.Text = "You are logged in as " + User.FullName + ".";
+                this.textBlockStatus.Text = "You are logged in as " + User.FirstName + " " + User.LastName + ".";
             }
         }
 
@@ -147,6 +149,7 @@ namespace BookStoreGUI
             {
                 var selectedOrderItem = this.listViewOrders.SelectedItem as OrderItem;
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
+
                 updateTotal();
             } else
             {
@@ -166,7 +169,7 @@ namespace BookStoreGUI
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!User.IsLoggedIn)
+            if (!Account.IsLoggedIn)
             {
                 MessageBox.Show("You must be logged in to place an order.");
                 return;
