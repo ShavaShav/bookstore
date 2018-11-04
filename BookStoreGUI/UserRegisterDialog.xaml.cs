@@ -92,6 +92,7 @@ namespace BookStoreGUI
             var addressLine1 = AddressLine1Box.Text.Trim();
             var addressLine2 = AddressLine2Box.Text.Trim();
             var city = CityBox.Text.Trim();
+            city = city.First().ToString().ToUpper() + city.Substring(1);
             var province = ProvinceComboBox.Text;
             var postalCode = PostalCodeBox.Text.Trim().ToUpper();
             postalCode.Replace(" ", "");
