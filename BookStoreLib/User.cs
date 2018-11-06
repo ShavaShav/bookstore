@@ -18,6 +18,7 @@ namespace BookStoreLib
         public string Type { set; get; }
         public bool IsManager { set; get; }
         public bool IsLoggedIn { set; get; }
+
         public List<string> ErrorMessages { set; get; }
 
         // Returns true if successful login
@@ -82,5 +83,23 @@ namespace BookStoreLib
 
             return this.IsLoggedIn;
         }
+
+        public bool logout()
+        {
+            if (IsLoggedIn)
+            {
+                // Nullify user
+                this.Id = -1;
+                this.Username = "";
+                this.Password = "";
+                this.FullName = "";
+                this.Type = "";
+                this.IsManager = false;
+                this.IsLoggedIn = false;
+            }
+
+            return !this.IsLoggedIn; // true if logged out
+        }
+
     }
 }
