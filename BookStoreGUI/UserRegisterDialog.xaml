@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BookStoreGUI"
         mc:Ignorable="d"
-        Title="User Registration" Height="500" Width="350" ResizeMode="NoResize">
+        Title="User Registration" Height="375" Width="350" ResizeMode="NoResize">
     <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="8">
         <GroupBox Header="Account Details" Margin="4">
             <Grid>
@@ -30,11 +30,11 @@
                 <Label
                     x:Name="ConfirmPasswordLabel" Content="Confirm Password:"
                     Grid.Row="2" Grid.Column="0" />
-                
+
                 <TextBox
                     x:Name="UsernameBox" CharacterCasing="Lower"
                     Grid.Row="0" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-                
+
                 <PasswordBox
                     x:Name="PasswordBox"
                     Grid.Row="1" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
@@ -42,18 +42,12 @@
                 <PasswordBox
                     x:Name="ConfirmPasswordBox"
                     Grid.Row="2" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-                
+
             </Grid>
         </GroupBox>
         <GroupBox Header="Personal Details" Margin="4">
             <Grid>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="auto"/>
@@ -82,26 +76,6 @@
                 x:Name="PhoneLabel" Content="Phone:"
                 Grid.Row="3" Grid.Column="0" />
 
-                <Label 
-                x:Name="AddressLine1Label" Content="Address Line 1:"
-                Grid.Row="4" Grid.Column="0" />
-
-                <Label 
-                x:Name="AddressLine2Label" Content="Address Line 2: (optional)"
-                Grid.Row="5" Grid.Column="0" />
-
-                <Label 
-                x:Name="CityLabel" Content="City:"
-                Grid.Row="6" Grid.Column="0" />
-
-                <Label 
-                x:Name="ProvinceLabel" Content="Province:"
-                Grid.Row="7" Grid.Column="0" />
-
-                <Label 
-                x:Name="PostalCodeLabel" Content="Postal Code:"
-                Grid.Row="8" Grid.Column="0" />
-
                 <TextBox 
                 x:Name="FirstNameBox"
                 Grid.Row="0" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
@@ -117,37 +91,6 @@
                 <TextBox 
                 x:Name="PhoneBox" 
                 Grid.Row="3" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-
-                <TextBox 
-                x:Name="AddressLine1Box" 
-                Grid.Row="4" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-
-                <TextBox 
-                x:Name="AddressLine2Box" 
-                Grid.Row="5" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-                
-                <TextBox 
-                x:Name="CityBox" 
-                Grid.Row="6" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
-
-                <ComboBox 
-                    x:Name="ProvinceComboBox"
-                    Grid.Row="7" Grid.Column="1" Margin="2" Height="24">
-                    <ComboBoxItem Content="Alberta" />
-                    <ComboBoxItem Content="British Columbia" />
-                    <ComboBoxItem Content="Manitoba" />
-                    <ComboBoxItem Content="New Brunswick" />
-                    <ComboBoxItem Content="Newfoundland and Labrador" />
-                    <ComboBoxItem Content="Nova Scotia" />
-                    <ComboBoxItem Content="Ontario" />
-                    <ComboBoxItem Content="Prince Edward Island" />
-                    <ComboBoxItem Content="Quebec" />
-                    <ComboBoxItem Content="Saskatchewan" />
-                </ComboBox>
-
-                <TextBox 
-                x:Name="PostalCodeBox" 
-                Grid.Row="8" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
             </Grid>
         </GroupBox>
         <Grid Margin="4">

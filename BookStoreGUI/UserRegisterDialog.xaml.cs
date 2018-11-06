@@ -18,8 +18,6 @@ namespace BookStoreGUI
 
         private const String phonePattern = @"^\(?([0-9]{3})\)?[-.● ]?([0-9]{3})[-.●]?([0-9]{4})$";
 
-        private const String postalCodePattern = @"[ABCEGHJKLMNPRSTVXY][0-9][ABCEGHJKLMNPRSTVWXYZ] ?[0-9][ABCEGHJKLMNPRSTVWXYZ][0-9]";//only canadian postal code check for now.
-
         private const String numberFilter = @"[^\d]";
 
         public UserRegisterDialog()
@@ -36,11 +34,7 @@ namespace BookStoreGUI
                 FirstNameBox.Text.Trim().Equals("") || 
                 LastNameBox.Text.Trim().Equals("") ||
                 EmailBox.Text.Trim().Equals("") ||
-                PhoneBox.Text.Trim().Equals("") ||
-                AddressLine1Box.Text.Trim().Equals("") ||
-                CityBox.Text.Trim().Equals("") ||
-                ProvinceComboBox.SelectedIndex == -1 ||
-                PostalCodeBox.Text.Trim().Equals("") 
+                PhoneBox.Text.Trim().Equals("")
                 )
             {
                 MessageBox.Show("Please make sure to all required information has been entered.", "Incomplete Form");
@@ -71,16 +65,6 @@ namespace BookStoreGUI
                 return;
             }
 
-            // Check if a valid postal code is entered
-            if(!Regex.IsMatch(PostalCodeBox.Text.Trim().ToUpper(), postalCodePattern))
-            {
-                MessageBox.Show(
-                    "Invalid postal code entered. Please check the postal code you have entered.\n\n" +
-                    "- Postal codes are in the format of A1B 2C3 with the gap being optional.\n\n" +
-                    "- Postal codes can't contain the letters D, F, I, O, Q, or U, and cannot start with W or Z", "Invalid Postal Code");
-                return;
-            }
-
             // If no error is detected, prepare the fields
             var username = UsernameBox.Text.Trim();
             var firstName = FirstNameBox.Text.Trim();
@@ -89,18 +73,10 @@ namespace BookStoreGUI
             lastName = lastName.First().ToString().ToUpper() + lastName.Substring(1);
             var email = EmailBox.Text.Trim().ToLower();
             var phone = Regex.Replace(PhoneBox.Text.Trim(), numberFilter, "");
-            var addressLine1 = AddressLine1Box.Text.Trim();
-            var addressLine2 = AddressLine2Box.Text.Trim();
-            var city = CityBox.Text.Trim();
-            city = city.First().ToString().ToUpper() + city.Substring(1);
-            var province = ProvinceComboBox.Text;
-            var postalCode = PostalCodeBox.Text.Trim().ToUpper();
-            postalCode.Replace(" ", "");
 
             // Create the User object to pass to the register function
             User user = new User(
-                username, firstName, lastName, email, phone, addressLine1, 
-                addressLine2, city, province, postalCode);
+                username, firstName, lastName, email, phone);
 
             // DEBUG: Show the user's info before starting registration process
             MessageBox.Show(user.ToString(), "User Info from User.cs");

@@ -30,18 +30,13 @@ namespace BookStoreLib
         public string Province { get; set; }
         public string PostalCode { get; set; }
 
-        public User(string username, string firstname, string lastname, string email, string phone, string addressLine1, string addressLine2, string city, string province, string postalCode)
+        public User(string username, string firstname, string lastname, string email, string phone)
         {
             this.Username = username;
             this.FirstName = firstname;
             this.LastName = lastname;
             this.Email = email;
             this.Phone = phone;
-            this.AddressLine1 = addressLine1;
-            this.AddressLine2 = addressLine2;
-            this.City = city;
-            this.Province = province;
-            this.PostalCode = postalCode;
         }
 
         public bool logout()
@@ -73,12 +68,7 @@ namespace BookStoreLib
                 "First Name: " + FirstName + "\n" +
                 "Last Name: " + LastName + "\n" +
                 "Email: " + Email + "\n" +
-                "Phone: " + Phone + "\n" +
-                "Address 1: " + AddressLine1 + "\n" +
-                "Address 2: " + AddressLine2 + "\n" +
-                "City: " + City + "\n" +
-                "Province: " + Province + "\n" +
-                "Postal Code: " + PostalCode + "\n";
+                "Phone: " + Phone + "\n";
 
             return returnString;
         }
