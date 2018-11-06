@@ -11,7 +11,7 @@ namespace BookStoreLib
         private SqlCommand RegisterSQL = new SqlCommand
         {
             CommandText = "INSERT INTO [User] VALUES ("
-                     + "@Username, @Password, @FirstName, @LastName, @Email, @Phone, @AddressLine1, @AddressLine2, @City, @Province, @PostalCode "
+                     + "@Username, @Password, @FirstName, @LastName, @Email, @Phone "
         };
 
         private SqlCommand loginSQL = new SqlCommand
@@ -43,13 +43,7 @@ namespace BookStoreLib
                         (string)reader["FirstName"],
                         (string)reader["LastName"],
                         (string)reader["Email"],
-                        (string)reader["Phone"],
-                        (string)reader["AddressLine1"],
-                        (string)reader["AddressLine2"],
-                        (string)reader["City"],
-                        (string)reader["Province"],
-                        (string)reader["PostalCode"]);
-                    user.setUserId((int)reader["Id"]);
+                        (string)reader["Phone"]);
                     return user;
                 }
                 else
@@ -85,11 +79,6 @@ namespace BookStoreLib
                 RegisterSQL.Parameters.AddWithValue("@LastName", user.LastName);
                 RegisterSQL.Parameters.AddWithValue("@Email", user.Email);
                 RegisterSQL.Parameters.AddWithValue("@Phone", user.Phone);
-                RegisterSQL.Parameters.AddWithValue("@AddressLine1", user.AddressLine1);
-                RegisterSQL.Parameters.AddWithValue("@AddressLine2", user.AddressLine2);
-                RegisterSQL.Parameters.AddWithValue("@City", user.City);
-                RegisterSQL.Parameters.AddWithValue("@Province", user.Province);
-                RegisterSQL.Parameters.AddWithValue("@PostalCode", user.PostalCode);
 
                 conn.Open();
                 var writer = RegisterSQL.ExecuteNonQuery();
