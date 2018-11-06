@@ -44,7 +44,10 @@ namespace BookStoreLib
                 username = "newUser",
                 password = "nu1234";
 
-            User sampleUser = new User("newUser", "John", "Doe", "newUser@gmail.com", "2656546565");
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs for register()
             Boolean expectedRegisterReturn = true;
@@ -89,7 +92,10 @@ namespace BookStoreLib
             // Inputs
             string password = "ns1234";
 
-            User sampleUser = new User("newUser", "John", "Doe", "shaverz@uwindsor.ca", "2656546565");
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "shaverz@uwindsor.ca",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
             User expectedReturn = null;
@@ -108,7 +114,10 @@ namespace BookStoreLib
             // Inputs
             string password = "ns1234";
 
-            User sampleUser = new User("shaverz", "John", "Doe", "newUser@gmail.com", "2656546565");
+            User sampleUser = new User(
+            "shaverz", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
             User expectedReturn = null;
@@ -127,7 +136,10 @@ namespace BookStoreLib
             // Inputs
             string password = "ns12";
 
-            User sampleUser = new User("newUser", "John", "Doe", "newUser@gmail.com", "2656546565");
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
             User expectedReturn = null;
@@ -146,7 +158,10 @@ namespace BookStoreLib
             // Inputs
             string password = "1234rs";
 
-            User sampleUser = new User("newUser", "John", "Doe", "newUser@gmail.com", "2656546565");
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
             User expectedReturn = null;
@@ -165,7 +180,10 @@ namespace BookStoreLib
             // Inputs
             string password = "ns1234@";
 
-            User sampleUser = new User("newUser", "John", "Doe", "newUser@gmail.com", "2656546565");
+            User sampleUser = new User(
+            "newUser", "John", "Doe", "newUser@gmail.com",
+            "2656546565", "123 Address Street",
+            null, "Windsor", "ON", "A1B2C3");
 
             // Expected outputs
             User expectedReturn = null;
