@@ -1,0 +1,121 @@
+﻿<Window x:Class="BookStoreGUI.UserRegisterDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BookStoreGUI"
+        mc:Ignorable="d"
+        Title="User Registration" Height="375" Width="350" ResizeMode="NoResize">
+    <StackPanel Orientation="Vertical" VerticalAlignment="Center" Margin="8">
+        <GroupBox Header="Account Details" Margin="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                    <RowDefinition Height="auto" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Label
+                    x:Name="UsernameLabel" Content="Username:"
+                    Grid.Row="0" Grid.Column="0" />
+
+                <Label
+                    x:Name="PasswordLabel" Content="New Password:"
+                    Grid.Row="1" Grid.Column="0" />
+
+                <Label
+                    x:Name="ConfirmPasswordLabel" Content="Confirm Password:"
+                    Grid.Row="2" Grid.Column="0" />
+                
+                <TextBox
+                    x:Name="UsernameBox" CharacterCasing="Lower"
+                    Grid.Row="0" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+                
+                <PasswordBox
+                    x:Name="PasswordBox"
+                    Grid.Row="1" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+
+                <PasswordBox
+                    x:Name="ConfirmPasswordBox"
+                    Grid.Row="2" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+                
+            </Grid>
+        </GroupBox>
+        <GroupBox Header="Personal Details" Margin="4">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                x:Name="FirstNameLabel" Content="First Name:"
+                Grid.Row="0" Grid.Column="0" />
+
+                <Label 
+                x:Name="LastNameLabel" Content="Last Name:"
+                Grid.Row="1" Grid.Column="0" />
+
+                <Label 
+                x:Name="EmailLabel" Content="Email Address:"
+                Grid.Row="2" Grid.Column="0" />
+
+                <Label 
+                x:Name="PhoneLabel" Content="Phone:"
+                Grid.Row="3" Grid.Column="0" />
+
+                <TextBox 
+                x:Name="FirstNameBox"
+                Grid.Row="0" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+
+                <TextBox 
+                x:Name="LastNameBox" 
+                Grid.Row="1" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+
+                <TextBox 
+                x:Name="EmailBox" 
+                Grid.Row="2" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+
+                <TextBox 
+                x:Name="PhoneBox" 
+                Grid.Row="3" Grid.Column="1" Margin="2" Height="24" VerticalContentAlignment="Center" BorderThickness="1" />
+            </Grid>
+        </GroupBox>
+        <Grid Margin="4">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="32" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <Button x:Name="OkButton" Content="Submit" 
+                    Grid.Row="0" Grid.Column="0" Margin="2" 
+                    Click="OkButton_Click" IsDefault="True" Background="#FF0070CC" Foreground="#FFEEEEEE" BorderBrush="#FF0070CC"/>
+
+            <Button x:Name="CancelButton" Content="Cancel" 
+                    Grid.Row="0" Grid.Column="1" Margin="2" 
+                    Click="CancelButton_Click" IsCancel="True"/>
+        </Grid>
+    </StackPanel>
+</Window>

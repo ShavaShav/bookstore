@@ -17,46 +17,53 @@ using BookStoreLib;
 
 namespace BookStoreGUI
 {
-     /// <summary>
-     /// Interaction logic for MainWindow.xaml
-     /// </summary>
-     public partial class LoginDialog : Window
-     {
-          public User User { get; private set; }
+    /// <summary>
+    /// Interaction logic for MainWindow.xaml
+    /// </summary>
+    public partial class LoginDialog : Window
+    {
+        public User User { get; private set; }
 
-          public LoginDialog()
-          {
-               InitializeComponent();
-          }
+        public LoginDialog()
+        {
+            InitializeComponent();
+        }
 
-          private void OnOKButtonClicked(object sender, RoutedEventArgs e)
-          {
-               string username = this.usernameTextBox.Text;
-               string password = this.passwordTextBox.Password;
+        private void OnOKButtonClicked(object sender, RoutedEventArgs e)
+        {
+            string username = this.usernameTextBox.Text;
+            string password = this.passwordTextBox.Password;
 
-               // Attempt login
-               User = new User();
-               if (User.Login(username, password))
-               {
-                    // Logged in succesfully, close.
-                    this.DialogResult = true;
-                    this.Close();
-               }
-               else
-               {
-                    // Login failed.
-                    MessageBox.Show("Please correct the following errors and try again: \n\n" 
-                         + String.Join("\n", User.ErrorMessages));
-                    // Uncomment following line? Assignment example closes window, but would be more user friendly to keep open.
-                    // this.Close();
-               }
-          }
+            // Attempt login
+            Account.Login(username, password);
+            if (Account.IsLoggedIn)
+            {
+                // Logged in succesfully, close.
+                User = Account.currentUser;
+                this.DialogResult = true;
+                this.Close();
+            }
+            else
+            {
+                // Login failed.
+                MessageBox.Show("Please correct the following errors and try again: \n\n"
+                     + String.Join("\n- ", Account.ErrorMessages));
+                // Uncomment following line? Assignment example closes window, but would be more user friendly to keep open.
+                // this.Close();
+            }
+        }
 
-          private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
-          {
-               // Login aborted, close.
-               this.DialogResult = false;
-               this.Close();
-          }
-     }
+        private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
+        {
+            // Login aborted, close.
+            this.DialogResult = false;
+            this.Close();
+        }
+
+        private void OnRegisterButtonClicked(object sender, RoutedEventArgs e)
+        {
+            UserRegisterDialog dlg = new UserRegisterDialog();
+            dlg.Show();
+        }
+    }
 }

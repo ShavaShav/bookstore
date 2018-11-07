@@ -34,7 +34,7 @@ namespace BookStoreGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            User = new User(); // init user
+            User = Account.currentUser;
             bookOrder = new BookOrder(); // start new order
 
             InitializeUI();
@@ -54,6 +54,7 @@ namespace BookStoreGUI
             this.DataContext = DsBookCat.Tables["Category"];
 
             // Intialize book order context (resets order table)
+            bookOrder = new BookOrder();
             this.listViewOrders.ItemsSource = bookOrder.OrderItemList;
 
             // Intialize status bar message
@@ -75,7 +76,7 @@ namespace BookStoreGUI
             {
                 // Login successful
                 User = loginDialog.User;
-                this.textBlockStatus.Text = "You are logged in as " + User.FullName + ".";
+                this.textBlockStatus.Text = "You are logged in as " + User.FirstName + " " + User.LastName + ".";
             }
         }
 
@@ -87,7 +88,7 @@ namespace BookStoreGUI
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             //to clear out the whole Main Window fields such as categories, books, and orders.
-            if (User.IsLoggedIn && User.logout())
+            if (Account.IsLoggedIn && Account.Logout())
             {
                 InitializeUI(); // reset the UI
                 bookOrder = new BookOrder(); // start a new order (user will need to log back in to complete)
@@ -147,6 +148,7 @@ namespace BookStoreGUI
             {
                 var selectedOrderItem = this.listViewOrders.SelectedItem as OrderItem;
                 bookOrder.RemoveItem(selectedOrderItem.BookID);
+
                 updateTotal();
             } else
             {
@@ -166,7 +168,7 @@ namespace BookStoreGUI
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
-            if (!User.IsLoggedIn)
+            if (!Account.IsLoggedIn)
             {
                 MessageBox.Show("You must be logged in to place an order.");
                 return;
