@@ -13,15 +13,32 @@ namespace BookStoreLib
         public static User currentUser = null;
 
         // Returns true if successful login
-        public static void Login(string username, string password)
+        public static bool Login(string username, string password)
         {
-            if (!isValidPassword(password)) return;
+            if (!isValidPassword(password)) return false;
+
             // Attempt login
             DALUser dbUser = new DALUser();
             currentUser = dbUser.Login(username, password);
 
             // dbUser's login function sets currentUser to a user object if login was successful.
-            IsLoggedIn = (currentUser == null) ? false : true;
+            IsLoggedIn = (currentUser != null);
+            return IsLoggedIn;
+        }
+
+        public static bool Logout()
+        {
+            try
+            {
+                currentUser = null;
+                IsLoggedIn = false;
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e);
+            }
+
+            return IsLoggedIn;
         }
 
         /* Function Register:
@@ -33,7 +50,7 @@ namespace BookStoreLib
          * Outputs:
          *  - Returns a user object if registration is successful, null if registration fails
          * 
-         */ 
+         */
         public static User Register(User user, string password)
         {
             // Check if password is valid

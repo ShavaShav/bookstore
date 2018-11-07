@@ -15,16 +15,13 @@ namespace BookStoreLib
         public void LogoutSuccess()
         {
             // login
-            User testUser = new User();
-            testUser.Login("shaverz", "zs1234");
-            Assert.IsTrue(testUser.IsLoggedIn);
-
-            int expectedId = -1;
+            Account.Login("shaverz", "zs1234");
+            Assert.IsTrue(Account.IsLoggedIn);
 
             // logout
-            testUser.logout();
-            Assert.IsFalse(testUser.IsLoggedIn);
-            Assert.AreEqual(testUser.Id, expectedId);
+            Account.Logout();
+            Assert.IsFalse(Account.IsLoggedIn);
+            Assert.AreEqual(Account.currentUser, null);
         }
     }
 }

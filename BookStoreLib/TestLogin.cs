@@ -24,7 +24,6 @@ namespace BookStoreLib
         }
 
         // Test Case #1
-        [Ignore]
         [TestMethod]
         public void LoginSuccess()
         {

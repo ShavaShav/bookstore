@@ -145,7 +145,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\BookStoreLib\BookStoreLib.csproj">
-      <Project>{72E00D8B-7B77-41F5-93C8-27DB552EA04B}</Project>
+      <Project>{72e00d8b-7b77-41f5-93c8-27db552ea04b}</Project>
       <Name>BookStoreLib</Name>
     </ProjectReference>
   </ItemGroup>

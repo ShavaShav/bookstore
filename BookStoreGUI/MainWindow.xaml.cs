@@ -34,7 +34,7 @@ namespace BookStoreGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            User = new User(); // init user
+            User = Account.currentUser;
             bookOrder = new BookOrder(); // start new order
 
             InitializeUI();
@@ -55,7 +55,6 @@ namespace BookStoreGUI
 
             // Intialize book order context (resets order table)
             bookOrder = new BookOrder();
-            User = Account.currentUser;
             this.listViewOrders.ItemsSource = bookOrder.OrderItemList;
 
             // Intialize status bar message
@@ -89,7 +88,7 @@ namespace BookStoreGUI
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             //to clear out the whole Main Window fields such as categories, books, and orders.
-            if (User.IsLoggedIn && User.logout())
+            if (Account.IsLoggedIn && Account.Logout())
             {
                 InitializeUI(); // reset the UI
                 bookOrder = new BookOrder(); // start a new order (user will need to log back in to complete)
