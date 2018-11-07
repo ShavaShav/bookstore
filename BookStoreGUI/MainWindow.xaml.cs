@@ -34,16 +34,30 @@ namespace BookStoreGUI
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
+            User = new User(); // init user
+            bookOrder = new BookOrder(); // start new order
+
+            InitializeUI();
+        }
+
+        // Initialize state of all UI componets
+        public void InitializeUI()
+        {
+            // Unset category
+            categoriesComboBox.SelectedItem = -1;
+
+            // Intialize book table
             BookCatalog bookCat = new BookCatalog();
             DsBookCat = bookCat.GetBookInfo();
             Console.WriteLine(DsBookCat.ToString());
 
             this.DataContext = DsBookCat.Tables["Category"];
-            
 
-            bookOrder = new BookOrder();
-            User = new User();
+            // Intialize book order context (resets order table)
             this.listViewOrders.ItemsSource = bookOrder.OrderItemList;
+
+            // Intialize status bar message
+            this.textBlockStatus.Text = "Please login before proceeding to checkout.";
         }
 
         private void listViewOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -73,12 +87,10 @@ namespace BookStoreGUI
         private void LogoutButton_Click(object sender, RoutedEventArgs e)
         {
             //to clear out the whole Main Window fields such as categories, books, and orders.
-            if (User.logout())
+            if (User.IsLoggedIn && User.logout())
             {
-                categoriesComboBox.SelectedItem = -1;
-                dataGridBooks.Items.Clear();
-                listViewOrders.Items.Clear();
-                this.textBlockStatus.Text = "You are logged out.";
+                InitializeUI(); // reset the UI
+                bookOrder = new BookOrder(); // start a new order (user will need to log back in to complete)
             }
         }
 

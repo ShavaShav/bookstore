@@ -148,7 +148,7 @@ CREATE TABLE [dbo].[Orders] (
 );
 
 
-CREATE TABLE [dbo].[Book] (
+CREATE TABLE [dbo].[Books] (
     [ISBN]       CHAR (10)       NOT NULL,
     [CategoryID] INT             NOT NULL,
     [Title]      VARCHAR (80)    NULL,
@@ -171,7 +171,7 @@ CREATE TABLE [dbo].[OrderItem] (
     [Quantity] INT       NOT NULL,
     CONSTRAINT [PK_OrderItem] PRIMARY KEY CLUSTERED ([OrderID] ASC, [ISBN] ASC),
     CONSTRAINT [FK_OrderItem_Orders] FOREIGN KEY ([OrderID]) REFERENCES [dbo].[Orders] ([OrderID]),
-    CONSTRAINT [FK_OrderItem_Product] FOREIGN KEY ([ISBN]) REFERENCES [dbo].[Book] ([ISBN])
+    CONSTRAINT [FK_OrderItem_Product] FOREIGN KEY ([ISBN]) REFERENCES [dbo].[Books] ([ISBN])
 );
 
 /********************************************************************************************************
