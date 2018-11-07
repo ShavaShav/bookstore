@@ -99,7 +99,7 @@ namespace BookStoreLib
 
             // Assert on results
             Assert.AreEqual(expectedReturn, testUser);
-            Assert.IsTrue(Account.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
+            Assert.IsTrue(Account.ErrorMessages.Contains("Username or email already exists in database"));
         }
 
         [TestMethod]
@@ -118,7 +118,7 @@ namespace BookStoreLib
 
             // Assert on results
             Assert.AreEqual(expectedReturn, testUser);
-            Assert.IsTrue(Account.ErrorMessages.Contains("Password must only contain alpha numeric characters."));
+            Assert.IsTrue(Account.ErrorMessages.Contains("Username or email already exists in database"));
         }
 
         [TestMethod]

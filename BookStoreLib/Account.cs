@@ -53,12 +53,15 @@ namespace BookStoreLib
          */
         public static User Register(User user, string password)
         {
+            // Create a DALUser object
+            DALUser dbUser = new DALUser();
             // Check if password is valid
             if (!isValidPassword(password)) return null;
 
-            // Create a DALUser object and call the Register() function
-            // If registration is successful, return the user object
-            DALUser dbUser = new DALUser();
+            // Check if username or email exist in DB
+            if (dbUser.UsernameOrEmailExistsInDb(user)) return null;
+
+            // Attempt registration, return the user object if successful
             if (dbUser.Register(user, password))
                 return user;
 
@@ -71,11 +74,11 @@ namespace BookStoreLib
 
             // If password is smaller than 6
             if (password.Length < 6)
-                ErrorMessages.Add("Password is smaller than 6 characters");
+                ErrorMessages.Add("Password must be at least 6 characters.");
 
             // If first letter is not a letter
             if (!char.IsLetter(password[0]))
-                ErrorMessages.Add("Password does not start with a letter");
+                ErrorMessages.Add("Password must start with an alphabetical character.");
 
             // If string contains characters that are not letters or digits
             if (!password.All(Char.IsLetterOrDigit))

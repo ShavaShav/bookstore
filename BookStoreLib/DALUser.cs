@@ -11,13 +11,19 @@ namespace BookStoreLib
         private SqlCommand RegisterSQL = new SqlCommand
         {
             CommandText = "INSERT INTO [User] VALUES ("
-                     + "@Username, @Password, @FirstName, @LastName, @Email, @Phone "
+                     + "@Username, @Password, @FirstName, @LastName, @Email, @Phone )"
         };
 
         private SqlCommand loginSQL = new SqlCommand
         {
             CommandText = "Select * from [User] where "
                      + "Username = @Username and Password = @Password "
+        };
+
+        private SqlCommand uniquenessCheckSQL = new SqlCommand
+        {
+            CommandText = "Select * from [User] where "
+                     + "Username = @Username or Email = @Email "
         };
 
         private static string connString = Properties.Settings.Default.DatabaseConnectionString;
@@ -48,7 +54,6 @@ namespace BookStoreLib
                 }
                 else
                 {
-                    Account.ErrorMessages.Clear();
                     Account.ErrorMessages.Add("Invalid username/password");
                     return null;
                 }
@@ -57,6 +62,38 @@ namespace BookStoreLib
             {
                 Console.WriteLine(e.ToString());
                 return null;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                {
+                    conn.Close();
+                }
+            }
+        }
+
+        internal bool UsernameOrEmailExistsInDb(User user)
+        {
+            var conn = new SqlConnection(connString);
+            try
+            {
+                uniquenessCheckSQL.Connection = conn;
+                uniquenessCheckSQL.Parameters.AddWithValue("@Username", user.Username);
+                uniquenessCheckSQL.Parameters.AddWithValue("@Email", user.Email);
+
+                conn.Open();
+                var reader = uniquenessCheckSQL.ExecuteReader();
+                if (reader.HasRows)
+                {
+                    Account.ErrorMessages.Add("Username or email already exists in database");
+                    return true;
+                }
+                else return false;
+            }
+            catch (Exception e)
+            {
+                Console.Error.WriteLine(e.ToString());
+                return false;
             }
             finally
             {
