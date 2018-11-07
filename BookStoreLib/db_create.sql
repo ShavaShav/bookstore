@@ -128,13 +128,14 @@ CREATE TABLE [dbo].[Supplier] (
 );
 
 CREATE TABLE [dbo].[User] (
-    [Id]       INT           NOT NULL,
-    [UserName] VARCHAR (20)  NOT NULL,
-    [Password] VARCHAR (25)  NOT NULL,
-    [Type]     CHAR (2)      NOT NULL,
-    [Manager]  BIT           NOT NULL,
-    [FullName] NVARCHAR (50) NULL,
-    CONSTRAINT [PK_Employee] PRIMARY KEY CLUSTERED ([Id] ASC)
+    [Id]		INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
+    [Username]	VARCHAR (20)	NOT NULL,
+    [Password]	VARCHAR (25)	NOT NULL,
+    [FirstName]	VARCHAR (50)	NOT NULL,
+    [LastName]	VARCHAR (50)	NOT NULL,
+    [Email]		VARCHAR (50)	NOT NULL,
+	[Phone]		CHAR (10)	NOT NULL
+    /* CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC) */
 );
 
 
@@ -179,6 +180,6 @@ CREATE TABLE [dbo].[OrderItem] (
  ********************************************************************************************************
 */
 
-INSERT INTO [dbo].[User] (Id, UserName, Password, Type, Manager, FullName)
-VALUES(0, 'shaverz', 'zs1234', 'AD', '0', 'Zach Shaver');
+INSERT INTO [dbo].[User] (Username, Password, FirstName, LastName, Email, Phone)
+VALUES('shaverz', 'zs1234', 'Zach', 'Shaver', 'shaverz@uwindsor.ca', '2656546565');
 

@@ -79,7 +79,7 @@ namespace BookStoreLib
 
             // If string contains characters that are not letters or digits
             if (!password.All(Char.IsLetterOrDigit))
-                ErrorMessages.Add("Password contains non-alphanumeric characters");
+                ErrorMessages.Add("Password must only contain alpha numeric characters.");
 
             // If password does not contain both letters and numbers
             var containsDigits = false;
