@@ -14,7 +14,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 using BookStoreLib;
-
+//Main GUI file for prefaceBookStore
 namespace BookStoreGUI
 {
     /// <summary>
