@@ -183,3 +183,5 @@ CREATE TABLE [dbo].[OrderItem] (
 INSERT INTO [dbo].[User] (Username, Password, FirstName, LastName, Email, Phone)
 VALUES('shaverz', 'zs1234', 'Zach', 'Shaver', 'shaverz@uwindsor.ca', '2656546565');
 
+INSERT INTO [dbo].[User] (Username, Password, FirstName, LastName, Email, Phone)
+VALUES('edit_user', 'testpass1234', 'John', 'Smith', 'edit@user.com', '1231231234');
