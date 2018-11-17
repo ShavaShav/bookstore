@@ -23,37 +23,39 @@ namespace BookStoreLib
         public void SetUp()
         {
             // Reset the test user's db fields and the current user for each test
-            try
+            using (var sc = new SqlConnection(Properties.Settings.Default.DatabaseConnectionString))
+            using (var cmd = sc.CreateCommand())
             {
-                using (var sc = new SqlConnection(Properties.Settings.Default.DatabaseConnectionString))
-                using (var cmd = sc.CreateCommand())
-                {
-                    sc.Open();
-                    cmd.CommandText = "UPDATE [User] SET " + 
-                        "Username = @username, " +
-                        "Password = @password, " +
-                        "Email = @email, " +
-                        "FirstName = @firstName, " +
-                        "LastName = @lastName, " +
-                        "Phone = @phone " +
-                        "WHERE id = @id";
-                    cmd.Parameters.AddWithValue("@id", originalId);
-                    cmd.Parameters.AddWithValue("@username", originalUsername);
-                    cmd.Parameters.AddWithValue("@password", originalPassword);
-                    cmd.Parameters.AddWithValue("@email", originalEmail);
-                    cmd.Parameters.AddWithValue("@firstName", originalFirstName);
-                    cmd.Parameters.AddWithValue("@lastName", originalLastName);
-                    cmd.Parameters.AddWithValue("@phone", originalPhone);
-                    cmd.ExecuteNonQuery();
-                }
+                sc.Open();
+                cmd.CommandText = "UPDATE [User] SET " + 
+                    "Username = @username, " +
+                    "Password = @password, " +
+                    "Email = @email, " +
+                    "FirstName = @firstName, " +
+                    "LastName = @lastName, " +
+                    "Phone = @phone " +
+                    "WHERE Id = @id";
+                cmd.Parameters.AddWithValue("@id", originalId);
+                cmd.Parameters.AddWithValue("@username", originalUsername);
+                cmd.Parameters.AddWithValue("@password", originalPassword);
+                cmd.Parameters.AddWithValue("@email", originalEmail);
+                cmd.Parameters.AddWithValue("@firstName", originalFirstName);
+                cmd.Parameters.AddWithValue("@lastName", originalLastName);
+                cmd.Parameters.AddWithValue("@phone", originalPhone);
 
-                Account.Login(originalUsername, originalPassword);
-                testUser = Account.currentUser;
+                try
+                {
+                    cmd.ExecuteNonQuery();
+
+                    Account.Login(originalUsername, originalPassword);
+                    testUser = Account.currentUser;
+                }
+                catch (Exception e)
+                {
+                    Assert.Fail(e.Message);
+                }
             }
-            catch (Exception e)
-            {
-                Assert.Fail(e.Message);
-            }
+
         }
 
         private void AssertUserNotUpdated()
@@ -244,7 +246,7 @@ namespace BookStoreLib
         public void EditPhoneBlank()
         {
             string newPhone = "";
-            string errorMessage = "Phone number cannot be blank.";
+            string errorMessage = "Email is invalid.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, originalEmail, originalFirstName, originalLastName, newPhone
@@ -298,7 +300,7 @@ namespace BookStoreLib
         public void EditEmailBlank()
         {
             string newEmail = "";
-            string errorMessage = "Email cannot be blank.";
+            string errorMessage = "Email is invalid.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, newEmail, originalFirstName, originalLastName, originalPhone

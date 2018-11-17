@@ -129,12 +129,12 @@ CREATE TABLE [dbo].[Supplier] (
 
 CREATE TABLE [dbo].[User] (
     [Id]		INT IDENTITY(1,1) PRIMARY KEY NOT NULL,
-    [Username]	VARCHAR (20)	NOT NULL UNIQUE,
-    [Password]	VARCHAR (25)	NOT NULL,
-    [FirstName]	VARCHAR (50)	NOT NULL,
-    [LastName]	VARCHAR (50)	NOT NULL,
-    [Email]		VARCHAR (50)	NOT NULL UNIQUE,
-	[Phone]		CHAR (10)	NOT NULL
+    [Username]	VARCHAR (64)	NOT NULL UNIQUE,
+    [Password]	VARCHAR (255)	NOT NULL,
+    [FirstName]	VARCHAR (80)	NOT NULL,
+    [LastName]	VARCHAR (80)	NOT NULL,
+    [Email]		VARCHAR (254)	NOT NULL UNIQUE,
+	[Phone]		CHAR (20)	NOT NULL
     /* CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC) */
 );
 

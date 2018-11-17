@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace BookStoreLib
@@ -133,6 +134,37 @@ namespace BookStoreLib
             {
                 if (conn.State == System.Data.ConnectionState.Open)
                     conn.Close();
+            }
+        }
+
+        public bool Edit(int userId, String username, String password, String email, String firstName, String lastName, String phone)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                string queryString = "UPDATE [User] SET " +
+                    "Username = @username, " +
+                    "Password = @password, " +
+                    "Email = @email, " +
+                    "FirstName = @firstName, " +
+                    "LastName = @lastName, " +
+                    "Phone = @phone " +
+                    "WHERE id = @id";
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@id", userId);
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@firstName", firstName);
+                command.Parameters.AddWithValue("@lastName", lastName);
+                command.Parameters.AddWithValue("@phone", phone);
+                connection.Open();
+
+                var rowsUpdated = command.ExecuteNonQuery();
+
+                connection.Close();
+
+                return rowsUpdated == 1;
             }
         }
     }

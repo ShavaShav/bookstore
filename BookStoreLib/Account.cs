@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace BookStoreLib
@@ -12,9 +13,14 @@ namespace BookStoreLib
         public static List<string> ErrorMessages = new List<string>();
         public static User currentUser = null;
 
+        private const string EMAIL_REGEX = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$";
+        private const string PHONE_REGEX = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";
+
         // Returns true if successful login
         public static bool Login(string username, string password)
         {
+            ErrorMessages.Clear();
+
             if (!isValidPassword(password)) return false;
 
             // Attempt login
@@ -53,6 +59,8 @@ namespace BookStoreLib
          */
         public static User Register(User user, string password)
         {
+            ErrorMessages.Clear();
+
             // Create a DALUser object
             DALUser dbUser = new DALUser();
             // Check if password is valid
@@ -68,10 +76,54 @@ namespace BookStoreLib
             else return null;
         }
 
+        // Edits all of current users fields
+        public static bool Edit(string username, string password, string email, string firstName, string lastName, string phone)
+        {
+            // Validate fields
+            if (!IsLoggedIn || currentUser.Id < 0)
+            {
+                ErrorMessages.Add("Current user is not valid.");
+                return false; // dont bother validating rest
+            }
+
+            if (username.Equals(""))
+                ErrorMessages.Add("Username cannot be blank.");
+
+            isValidPassword(password); // Function populates error messages
+
+            var validEmail = Regex.Match(email, EMAIL_REGEX, RegexOptions.IgnoreCase);
+            if (!validEmail.Success)
+                ErrorMessages.Add("Email is invalid.");
+
+            if (firstName.Equals(""))
+                ErrorMessages.Add("First name cannot be blank.");
+
+            if (lastName.Equals(""))
+                ErrorMessages.Add("Last name cannot be blank.");
+
+            var validPhone = Regex.Match(phone, PHONE_REGEX, RegexOptions.IgnoreCase);
+            if (!validPhone.Success)
+                ErrorMessages.Add("Phone number is invalid.");
+
+            // Attempt edit, returns true if successful
+            DALUser dbUser = new DALUser();
+            bool updated = dbUser.Edit(currentUser.Id, username, password, email, firstName, lastName, phone);
+            
+            if (updated)
+            {
+                // details are persisted, can now set the current user instance's variables
+                currentUser.Username = username;
+                currentUser.Email = email;
+                currentUser.FirstName = firstName;
+                currentUser.LastName = lastName;
+                currentUser.Phone = phone;
+            }
+
+            return updated;
+        }
+
         private static bool isValidPassword(string password)
         {
-            ErrorMessages.Clear();
-
             // If password is smaller than 6
             if (password.Length < 6)
                 ErrorMessages.Add("Password must be at least 6 characters.");
