@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace BookStoreLib
@@ -107,6 +108,48 @@ namespace BookStoreLib
         public bool Register(User user, string password)
         {
             var conn = new SqlConnection(connString);
+            try
+            {
+                RegisterSQL.Connection = conn;
+                RegisterSQL.Parameters.AddWithValue("@Username", user.Username);
+                RegisterSQL.Parameters.AddWithValue("@Password", password);
+                RegisterSQL.Parameters.AddWithValue("@FirstName", user.FirstName);
+                RegisterSQL.Parameters.AddWithValue("@LastName", user.LastName);
+                RegisterSQL.Parameters.AddWithValue("@Email", user.Email);
+                RegisterSQL.Parameters.AddWithValue("@Phone", user.Phone);
+
+                conn.Open();
+                var writer = RegisterSQL.ExecuteNonQuery();
+                if (writer.Equals(1))
+                    return true;
+                else return false;
+            }
+            catch (Exception e)
+            {
+                Account.ErrorMessages.Add("Account creation failed due to database error");
+                Console.Error.WriteLine(e);
+                return false;
+            }
+            finally
+            {
+                if (conn.State == System.Data.ConnectionState.Open)
+                    conn.Close();
+            }
+        }
+
+        public bool Update(Dictionary<string, string> updates)
+        {
+            string CommandText = "INSERT INTO [User] VALUES ("
+                     + "@Username, @Password,  @Email)";
+
+            foreach (KeyValuePair<string, string> entry in updates)
+            {
+                string field = entry.Key;
+                string value = entry.Value;
+            }
+
+            var conn = new SqlConnection(connString);
+
             try
             {
                 RegisterSQL.Connection = conn;
