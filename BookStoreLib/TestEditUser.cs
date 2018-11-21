@@ -101,13 +101,16 @@ namespace BookStoreLib
             Assert.AreNotEqual(testUser.Username, newUsername); // quick sanity test
 
             Account.Login(newUsername, newPassword); // this also tests changed pass for free
+            // since now held and modified staticly in Account class, we need to re-get the updated instance.
+            // Note: Static instance makes state hard to reason about for this very reason.
+            User refreshedUser = Account.currentUser; 
 
             // Logged in user chould have the updated details
-            Assert.AreEqual(testUser.Username, newUsername);
-            Assert.AreEqual(testUser.Email, newEmail);
-            Assert.AreEqual(testUser.FirstName, newFirstName);
-            Assert.AreEqual(testUser.LastName, newLastName);
-            Assert.AreEqual(testUser.Phone, newPhone);
+            Assert.AreEqual(refreshedUser.Username, newUsername);
+            Assert.AreEqual(refreshedUser.Email, newEmail);
+            Assert.AreEqual(refreshedUser.FirstName, newFirstName);
+            Assert.AreEqual(refreshedUser.LastName, newLastName);
+            Assert.AreEqual(refreshedUser.Phone, newPhone);
         }
 
         [TestMethod]
@@ -256,7 +259,7 @@ namespace BookStoreLib
         public void EditPhoneBlank()
         {
             string newPhone = "";
-            string errorMessage = "Email is invalid.";
+            string errorMessage = "Phone number is invalid.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, originalEmail, originalFirstName, originalLastName, newPhone
@@ -282,7 +285,8 @@ namespace BookStoreLib
 
             // Should return FALSE and an error message
             Assert.IsFalse(output);
-            Assert.IsTrue(Account.ErrorMessages.Contains(errorMessage));
+            Assert.AreEqual(Account.ErrorMessages.Count, 1);
+            Assert.AreEqual(Account.ErrorMessages[0], errorMessage);
 
             // User should not be updated
             AssertUserNotUpdated();
@@ -292,7 +296,7 @@ namespace BookStoreLib
         public void EditEmailInvalid()
         {
             string newEmail = "bademail";
-            string errorMessage = "Email is invalid.";
+            string errorMessage = "Email address is invalid.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, newEmail, originalFirstName, originalLastName, originalPhone
@@ -310,7 +314,7 @@ namespace BookStoreLib
         public void EditEmailBlank()
         {
             string newEmail = "";
-            string errorMessage = "Email is invalid.";
+            string errorMessage = "Email address is invalid.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, newEmail, originalFirstName, originalLastName, originalPhone

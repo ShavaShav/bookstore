@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Mail;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ namespace BookStoreLib
         public static List<string> ErrorMessages = new List<string>();
         public static User currentUser = null;
 
-        private const string EMAIL_REGEX = @"^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$";
         private const string PHONE_REGEX = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";
 
         // Returns true if successful login
@@ -36,6 +36,16 @@ namespace BookStoreLib
         {
             try
             {
+                // Nullify user (MainWindow probably still holds instance)
+                currentUser.Id = -1;
+                currentUser.Username = "";
+                currentUser.Password = "";
+                currentUser.FullName = "";
+                currentUser.Type = "";
+                currentUser.IsManager = false;
+                currentUser.IsLoggedIn = false;
+
+                // Dereference our instance
                 currentUser = null;
                 IsLoggedIn = false;
             }
@@ -88,9 +98,8 @@ namespace BookStoreLib
 
             isValidPassword(password); // Function populates error messages
 
-            var validEmail = Regex.Match(email, EMAIL_REGEX, RegexOptions.IgnoreCase);
-            if (!validEmail.Success)
-                ErrorMessages.Add("Email is invalid.");
+            if (email.Equals("") || !isValidEmail(email))
+                ErrorMessages.Add("Email address is invalid.");
 
             if (firstName.Equals(""))
                 ErrorMessages.Add("First name cannot be blank.");
@@ -99,7 +108,7 @@ namespace BookStoreLib
                 ErrorMessages.Add("Last name cannot be blank.");
 
             var validPhone = Regex.Match(phone, PHONE_REGEX, RegexOptions.IgnoreCase);
-            if (!validPhone.Success)
+            if (phone.Equals("") || !validPhone.Success)
                 ErrorMessages.Add("Phone number is invalid.");
 
             if (ErrorMessages.Count > 0)
@@ -151,6 +160,19 @@ namespace BookStoreLib
 
             // Else, return true
             return ErrorMessages.Count == 0;
+        }
+
+        private static bool isValidEmail(string emailaddress)
+        {
+            try
+            {
+                MailAddress m = new MailAddress(emailaddress);
+                return true;
+            }
+            catch (FormatException)
+            {
+                return false;
+            }
         }
     }
 }

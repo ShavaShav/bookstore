@@ -154,19 +154,29 @@ namespace BookStoreLib
 
                 SqlCommand command = new SqlCommand(queryString, connection);
                 command.Parameters.AddWithValue("@id", userId);
-                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@username", username.Trim());
                 command.Parameters.AddWithValue("@password", password);
-                command.Parameters.AddWithValue("@email", email);
-                command.Parameters.AddWithValue("@firstName", firstName);
-                command.Parameters.AddWithValue("@lastName", lastName);
-                command.Parameters.AddWithValue("@phone", phone);
+                command.Parameters.AddWithValue("@email", email.Trim());
+                command.Parameters.AddWithValue("@firstName", firstName.Trim());
+                command.Parameters.AddWithValue("@lastName", lastName.Trim());
+                command.Parameters.AddWithValue("@phone", phone.Trim());
                 connection.Open();
 
-                var rowsUpdated = command.ExecuteNonQuery();
-
-                connection.Close();
-
-                return rowsUpdated == 1;
+                try
+                {
+                    var rowsUpdated = command.ExecuteNonQuery();
+                    return rowsUpdated == 1;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                    Account.ErrorMessages.Add("Username or email already exists.");
+                    return false; // constraint failed
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
     }
