@@ -8,13 +8,13 @@ namespace BookStoreLib
     public class TestEditUser
     {
         // Test user expectations for each test
-        int originalId = 2;
-        string originalUsername = "edit_user";
-        string originalPassword = "testpass1234";
-        string originalEmail = "edit@user.com";
-        string originalFirstName = "John";
-        string originalLastName = "Smith";
-        string originalPhone = "123 123 1234";
+        const int originalId = 2;
+        const string originalUsername = "edit_user";
+        const string originalPassword = "testpass1234";
+        const string originalEmail = "edit@user.com";
+        const string originalFirstName = "John";
+        const string originalLastName = "Smith";
+        const string originalPhone = "123 123 1234";
 
         // User object to be logged in on each test
         User testUser;
@@ -63,7 +63,6 @@ namespace BookStoreLib
             // Assert user fields are the same as original database entries
             Assert.AreEqual(testUser.Id, originalId);
             Assert.AreEqual(testUser.Username, originalUsername);
-            Assert.AreEqual(testUser.Password, originalPassword);
             Assert.AreEqual(testUser.Email, originalEmail);
             Assert.AreEqual(testUser.FirstName, originalFirstName);
             Assert.AreEqual(testUser.LastName, originalLastName);
@@ -92,7 +91,19 @@ namespace BookStoreLib
 
             // Current user should be updated
             Assert.AreEqual(testUser.Username, newUsername);
-            Assert.AreEqual(testUser.Password, newPassword);
+            Assert.AreEqual(testUser.Email, newEmail);
+            Assert.AreEqual(testUser.FirstName, newFirstName);
+            Assert.AreEqual(testUser.LastName, newLastName);
+            Assert.AreEqual(testUser.Phone, newPhone);
+
+            // Logout, try to log back in with new user
+            Account.Logout();
+            Assert.AreNotEqual(testUser.Username, newUsername); // quick sanity test
+
+            Account.Login(newUsername, newPassword); // this also tests changed pass for free
+
+            // Logged in user chould have the updated details
+            Assert.AreEqual(testUser.Username, newUsername);
             Assert.AreEqual(testUser.Email, newEmail);
             Assert.AreEqual(testUser.FirstName, newFirstName);
             Assert.AreEqual(testUser.LastName, newLastName);
@@ -126,7 +137,6 @@ namespace BookStoreLib
 
             // Current user should not have the updated fields
             Assert.AreNotEqual(testUser.Username, newUsername);
-            Assert.AreNotEqual(testUser.Password, newPassword);
             Assert.AreNotEqual(testUser.Email, newEmail);
             Assert.AreNotEqual(testUser.FirstName, newFirstName);
             Assert.AreNotEqual(testUser.LastName, newLastName);
@@ -137,7 +147,7 @@ namespace BookStoreLib
         public void EditUsernameNonUnique()
         {
             string newUsername = "shaverz";
-            string errorMessage = "Username already exists.";
+            string errorMessage = "Username or email already exists.";
 
             bool output = Account.Edit(
                 newUsername, originalPassword, originalEmail, originalFirstName, originalLastName, originalPhone
@@ -264,7 +274,7 @@ namespace BookStoreLib
         public void EditEmailNonUnique()
         {
             string newEmail = "shaverz@uwindsor.ca";
-            string errorMessage = "Email already exists.";
+            string errorMessage = "Username or email already exists.";
 
             bool output = Account.Edit(
                 originalUsername, originalPassword, newEmail, originalFirstName, originalLastName, originalPhone

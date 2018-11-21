@@ -134,7 +134,7 @@ CREATE TABLE [dbo].[User] (
     [FirstName]	VARCHAR (80)	NOT NULL,
     [LastName]	VARCHAR (80)	NOT NULL,
     [Email]		VARCHAR (254)	NOT NULL UNIQUE,
-	[Phone]		CHAR (20)	NOT NULL
+	[Phone]		VARCHAR (20)	NOT NULL
     /* CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED ([Id] ASC) */
 );
 

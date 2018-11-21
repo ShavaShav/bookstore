@@ -57,11 +57,6 @@ namespace BookStoreLib
             return !this.IsLoggedIn; // true if logged out
         }
 
-        public void setUserId(int id)
-        {
-            this.Id = id;
-        }
-
         public new string ToString()
         {
             String returnString =

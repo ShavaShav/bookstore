@@ -70,10 +70,7 @@ namespace BookStoreLib
             if (dbUser.UsernameOrEmailExistsInDb(user)) return null;
 
             // Attempt registration, return the user object if successful
-            if (dbUser.Register(user, password))
-                return user;
-
-            else return null;
+            return dbUser.Register(user, password);
         }
 
         // Edits all of current users fields
@@ -104,6 +101,9 @@ namespace BookStoreLib
             var validPhone = Regex.Match(phone, PHONE_REGEX, RegexOptions.IgnoreCase);
             if (!validPhone.Success)
                 ErrorMessages.Add("Phone number is invalid.");
+
+            if (ErrorMessages.Count > 0)
+                return false; // didnt pass validation
 
             // Attempt edit, returns true if successful
             DALUser dbUser = new DALUser();

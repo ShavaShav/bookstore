@@ -11,7 +11,7 @@ namespace BookStoreLib
     {
         private SqlCommand RegisterSQL = new SqlCommand
         {
-            CommandText = "INSERT INTO [User] VALUES ("
+            CommandText = "INSERT INTO [User] OUTPUT Inserted.Id VALUES ("
                      + "@Username, @Password, @FirstName, @LastName, @Email, @Phone )"
         };
 
@@ -51,6 +51,7 @@ namespace BookStoreLib
                         (string)reader["LastName"],
                         (string)reader["Email"],
                         (string)reader["Phone"]);
+                    user.Id = (int)reader["Id"];
                     return user;
                 }
                 else
@@ -73,6 +74,7 @@ namespace BookStoreLib
             }
         }
 
+        // TODO, remove this function as we now have a UNIQUE constraint
         internal bool UsernameOrEmailExistsInDb(User user)
         {
             var conn = new SqlConnection(connString);
@@ -105,7 +107,7 @@ namespace BookStoreLib
             }
         }
 
-        public bool Register(User user, string password)
+        public User Register(User user, string password)
         {
             var conn = new SqlConnection(connString);
             try
@@ -119,16 +121,16 @@ namespace BookStoreLib
                 RegisterSQL.Parameters.AddWithValue("@Phone", user.Phone);
 
                 conn.Open();
-                var writer = RegisterSQL.ExecuteNonQuery();
-                if (writer.Equals(1))
-                    return true;
-                else return false;
+                user.Id = (int)RegisterSQL.ExecuteScalar();
+
+                return user.Id > 0 ? user : null; 
+                // caller will hold a modified version of user after this call. dangerous
             }
             catch (Exception e)
             {
                 Account.ErrorMessages.Add("Account creation failed due to database error");
                 Console.Error.WriteLine(e);
-                return false;
+                return null;
             }
             finally
             {
@@ -137,7 +139,7 @@ namespace BookStoreLib
             }
         }
 
-        public bool Edit(int userId, String username, String password, String email, String firstName, String lastName, String phone)
+        public bool Edit(int userId, string username, string password, string email, string firstName, string lastName, string phone)
         {
             using (SqlConnection connection = new SqlConnection(connString))
             {
