@@ -181,10 +181,7 @@ namespace BookStoreGUI
         // assume 1usd = 1.32 cad
         public void priceinCAD_Click(object sender, RoutedEventArgs e)
         {
-            double total = 0.0;
-            total = (bookOrder.GetOrderTotal()) * 1.32;
-            totalPrice.Text = "CAD " + "$" + total.ToString();
-            return;
+            totalPrice.Text = "CAD " + "$" + bookOrder.getCDNTotal().ToString();
         }
 
         public void priceinUSD_Click(object sender, RoutedEventArgs e)

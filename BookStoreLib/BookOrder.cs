@@ -19,6 +19,12 @@ namespace BookStoreLib
         {
             get { return orderItemList; }
         }
+
+        public double getCDNTotal()
+        {
+            return GetOrderTotal() * 1.32;
+        }
+
         public void AddItem(OrderItem orderItem)
         {
             OrderItem changedItem = null, oldItem = null;
