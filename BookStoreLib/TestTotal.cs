@@ -18,6 +18,8 @@ namespace BookStoreLib
             bookOrder.AddItem(testOrderItem);
             Assert.AreEqual(bookOrder.getCDNTotal(), 200*1.32);
         }
+
+        [TestMethod]
         public void fromCADtoUSD()
         {
             // Add test order to list, assert in list
