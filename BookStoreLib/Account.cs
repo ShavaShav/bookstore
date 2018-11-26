@@ -36,16 +36,17 @@ namespace BookStoreLib
         {
             try
             {
-                // Nullify user (MainWindow probably still holds instance)
+                // MainWindow or whoever probably still holds instance, that we need to nullify 
                 currentUser.Id = -1;
                 currentUser.Username = "";
                 currentUser.Password = "";
-                currentUser.FullName = "";
+                currentUser.FirstName = "";
+                currentUser.LastName = "";
                 currentUser.Type = "";
                 currentUser.IsManager = false;
                 currentUser.IsLoggedIn = false;
 
-                // Dereference our instance
+                // Dereference our instance as well. TODO: Remove this account layer, makes logic prone to error
                 currentUser = null;
                 IsLoggedIn = false;
             }
