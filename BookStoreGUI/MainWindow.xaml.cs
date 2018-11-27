@@ -119,6 +119,11 @@ namespace BookStoreGUI
             UserProfile.Focus();
         }
 
+        private void about_click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
