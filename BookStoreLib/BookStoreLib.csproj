@@ -71,6 +71,7 @@
     <Compile Include="TestRegistration.cs" />
     <Compile Include="TestRemoveBook.cs" />
     <Compile Include="TestSetup.cs" />
+    <Compile Include="TestTotal.cs" />
     <Compile Include="User.cs" />
     <Compile Include="DALUser.cs" />
   </ItemGroup>

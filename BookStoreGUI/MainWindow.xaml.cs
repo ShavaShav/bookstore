@@ -162,9 +162,37 @@ namespace BookStoreGUI
             // TODO: set total field with bookOrgder.getTotal()
             double total = 0.0;
             total = bookOrder.GetOrderTotal();
-            totalPrice.Text = total.ToString();
+            totalPrice.Text = "USD "+"$"+ total.ToString();
             return;
         }
+
+
+        // Convert Total price between USD and CAD dollars (default is USD dollars)
+        private void buttonTotalPrice_Click(object sender, RoutedEventArgs e)
+        {
+            var addButton = sender as FrameworkElement;
+            if (addButton != null)
+            {
+                addButton.ContextMenu.IsOpen = true;
+            }
+        }
+
+
+        // assume 1usd = 1.32 cad
+        public void priceinCAD_Click(object sender, RoutedEventArgs e)
+        {
+            totalPrice.Text = "CAD " + "$" + bookOrder.getCDNTotal().ToString();
+        }
+
+        public void priceinUSD_Click(object sender, RoutedEventArgs e)
+        {
+            updateTotal();
+        }
+
+
+
+
+
 
         private void CheckoutButton_Click(object sender, RoutedEventArgs e)
         {
