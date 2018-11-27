@@ -34,28 +34,21 @@ namespace BookStoreLib
 
         public static bool Logout()
         {
-            try
-            {
-                // MainWindow or whoever probably still holds instance, that we need to nullify 
-                currentUser.Id = -1;
-                currentUser.Username = "";
-                currentUser.Password = "";
-                currentUser.FirstName = "";
-                currentUser.LastName = "";
-                currentUser.Type = "";
-                currentUser.IsManager = false;
-                currentUser.IsLoggedIn = false;
+            // MainWindow or whoever probably still holds instance, that we need to nullify 
+            currentUser.Id = -1;
+            currentUser.Username = "";
+            currentUser.Password = "";
+            currentUser.FirstName = "";
+            currentUser.LastName = "";
+            currentUser.Type = "";
+            currentUser.IsManager = false;
+            currentUser.IsLoggedIn = false;
 
-                // Dereference our instance as well. TODO: Remove this account layer, makes logic prone to error
-                currentUser = null;
-                IsLoggedIn = false;
-            }
-            catch (Exception e)
-            {
-                Console.Error.WriteLine(e);
-            }
-
-            return IsLoggedIn;
+            // Dereference our instance as well. TODO: Remove this account layer, makes logic prone to error
+            currentUser = null;
+            IsLoggedIn = false;
+        
+            return !IsLoggedIn;
         }
 
         /* Function Register:
@@ -87,6 +80,8 @@ namespace BookStoreLib
         // Edits all of current users fields
         public static bool Edit(string username, string password, string email, string firstName, string lastName, string phone)
         {
+            ErrorMessages.Clear();
+
             // Validate fields
             if (!IsLoggedIn || currentUser.Id < 0)
             {
@@ -137,27 +132,29 @@ namespace BookStoreLib
             // If password is smaller than 6
             if (password.Length < 6)
                 ErrorMessages.Add("Password must be at least 6 characters.");
-
-            // If first letter is not a letter
-            if (!char.IsLetter(password[0]))
-                ErrorMessages.Add("Password must start with an alphabetical character.");
-
-            // If string contains characters that are not letters or digits
-            if (!password.All(Char.IsLetterOrDigit))
-                ErrorMessages.Add("Password must only contain alpha numeric characters.");
-
-            // If password does not contain both letters and numbers
-            var containsDigits = false;
-            var containsLetters = false;
-
-            for (var i = 0; i < password.Length; i++)
+            else
             {
-                if (char.IsDigit(password[i])) containsDigits = true;
-                if (char.IsLetter(password[i])) containsLetters = true;
-            }
+                // If first letter is not a letter
+                if (!char.IsLetter(password[0]))
+                    ErrorMessages.Add("Password must start with an alphabetical character.");
 
-            if (!containsLetters || !containsDigits)
-                ErrorMessages.Add("Password should contain both letters and numbers");
+                // If string contains characters that are not letters or digits
+                if (!password.All(Char.IsLetterOrDigit))
+                    ErrorMessages.Add("Password must only contain alpha numeric characters.");
+
+                // If password does not contain both letters and numbers
+                var containsDigits = false;
+                var containsLetters = false;
+
+                for (var i = 0; i < password.Length; i++)
+                {
+                    if (char.IsDigit(password[i])) containsDigits = true;
+                    if (char.IsLetter(password[i])) containsLetters = true;
+                }
+
+                if (!containsLetters || !containsDigits)
+                    ErrorMessages.Add("Password should contain both letters and numbers");
+            }
 
             // Else, return true
             return ErrorMessages.Count == 0;
