@@ -74,6 +74,9 @@
     <Compile Include="UserRegisterDialog.xaml.cs">
       <DependentUpon>UserRegisterDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserProfile.xaml.cs">
+      <DependentUpon>UserProfile.xaml</DependentUpon>
+    </Compile>
     <Page Include="LoginDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,6 +100,10 @@
     <Page Include="UserRegisterDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="UserProfile.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

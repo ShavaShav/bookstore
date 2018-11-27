@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 
 namespace BookStoreLib
@@ -10,7 +11,7 @@ namespace BookStoreLib
     {
         private SqlCommand RegisterSQL = new SqlCommand
         {
-            CommandText = "INSERT INTO [User] VALUES ("
+            CommandText = "INSERT INTO [User] OUTPUT Inserted.Id VALUES ("
                      + "@Username, @Password, @FirstName, @LastName, @Email, @Phone )"
         };
 
@@ -50,6 +51,8 @@ namespace BookStoreLib
                         (string)reader["LastName"],
                         (string)reader["Email"],
                         (string)reader["Phone"]);
+                    user.Id = (int)reader["Id"];
+                    user.Password = (string)reader["Password"];
                     return user;
                 }
                 else
@@ -72,6 +75,7 @@ namespace BookStoreLib
             }
         }
 
+        // TODO, remove this function as we now have a UNIQUE constraint
         internal bool UsernameOrEmailExistsInDb(User user)
         {
             var conn = new SqlConnection(connString);
@@ -104,7 +108,7 @@ namespace BookStoreLib
             }
         }
 
-        public bool Register(User user, string password)
+        public User Register(User user, string password)
         {
             var conn = new SqlConnection(connString);
             try
@@ -118,21 +122,62 @@ namespace BookStoreLib
                 RegisterSQL.Parameters.AddWithValue("@Phone", user.Phone);
 
                 conn.Open();
-                var writer = RegisterSQL.ExecuteNonQuery();
-                if (writer.Equals(1))
-                    return true;
-                else return false;
+                user.Id = (int)RegisterSQL.ExecuteScalar();
+
+                return user.Id > 0 ? user : null; 
+                // caller will hold a modified version of user after this call. dangerous
             }
             catch (Exception e)
             {
                 Account.ErrorMessages.Add("Account creation failed due to database error");
                 Console.Error.WriteLine(e);
-                return false;
+                return null;
             }
             finally
             {
                 if (conn.State == System.Data.ConnectionState.Open)
                     conn.Close();
+            }
+        }
+
+        public bool Edit(int userId, string username, string password, string email, string firstName, string lastName, string phone)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                string queryString = "UPDATE [User] SET " +
+                    "Username = @username, " +
+                    "Password = @password, " +
+                    "Email = @email, " +
+                    "FirstName = @firstName, " +
+                    "LastName = @lastName, " +
+                    "Phone = @phone " +
+                    "WHERE id = @id";
+
+                SqlCommand command = new SqlCommand(queryString, connection);
+                command.Parameters.AddWithValue("@id", userId);
+                command.Parameters.AddWithValue("@username", username.Trim());
+                command.Parameters.AddWithValue("@password", password);
+                command.Parameters.AddWithValue("@email", email.Trim());
+                command.Parameters.AddWithValue("@firstName", firstName.Trim());
+                command.Parameters.AddWithValue("@lastName", lastName.Trim());
+                command.Parameters.AddWithValue("@phone", phone.Trim());
+                connection.Open();
+
+                try
+                {
+                    var rowsUpdated = command.ExecuteNonQuery();
+                    return rowsUpdated == 1;
+                }
+                catch (SqlException ex)
+                {
+                    Console.WriteLine(ex.StackTrace);
+                    Account.ErrorMessages.Add("Username or email already exists.");
+                    return false; // constraint failed
+                }
+                finally
+                {
+                    connection.Close();
+                }
             }
         }
     }

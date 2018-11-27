@@ -33,7 +33,7 @@ namespace BookStoreLib
 
             // Expected outputs
             Boolean expectedReturn = true;
-            int expectedUserId = 0;
+            int expectedUserId = 1;
 
             // Create a fresh user, execute login method
             Account.Login(username, password);
