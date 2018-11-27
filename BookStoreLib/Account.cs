@@ -14,7 +14,7 @@ namespace BookStoreLib
         public static List<string> ErrorMessages = new List<string>();
         public static User currentUser = null;
 
-        private const string PHONE_REGEX = @"^(\+\d{1,2}\s)?\(?\d{3}\)?[\s.-]\d{3}[\s.-]\d{4}$";
+        private const string PHONE_REGEX = @"^\(?([0-9]{3})\)?[-.● ]?([0-9]{3})[-.● ]?([0-9]{4})$";
 
         // Returns true if successful login
         public static bool Login(string username, string password)

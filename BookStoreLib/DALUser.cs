@@ -52,6 +52,7 @@ namespace BookStoreLib
                         (string)reader["Email"],
                         (string)reader["Phone"]);
                     user.Id = (int)reader["Id"];
+                    user.Password = (string)reader["Password"];
                     return user;
                 }
                 else

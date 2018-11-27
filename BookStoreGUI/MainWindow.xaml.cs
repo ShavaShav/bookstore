@@ -26,6 +26,7 @@ namespace BookStoreGUI
         private DataSet DsBookCat { get; set; }
         private BookOrder bookOrder { get; set; }
 
+        private UserProfile UserProfile { get; set; }
 
         public MainWindow()
         {
@@ -40,9 +41,11 @@ namespace BookStoreGUI
             InitializeUI();
         }
 
-        // Initialize state of all UI componets
+        // Initialize state of all UI components to their defaults
         public void InitializeUI()
         {
+            InitializeMenu();
+
             // Unset category
             categoriesComboBox.SelectedItem = -1;
 
@@ -59,6 +62,29 @@ namespace BookStoreGUI
 
             // Intialize status bar message
             this.textBlockStatus.Text = "Please login before proceeding to checkout.";
+
+            // Close any windows or dialogs
+            if (UserProfile != null)
+            {
+                UserProfile.Close();
+                UserProfile = null;
+            }
+        }
+
+        private void InitializeMenu()
+        {
+            if (Account.IsLoggedIn)
+            {
+                this.buttonLogin.Visibility = Visibility.Collapsed;
+                this.buttonProfile.Visibility = Visibility.Visible;
+                this.buttonLogout.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                this.buttonLogin.Visibility = Visibility.Visible;
+                this.buttonProfile.Visibility = Visibility.Collapsed;
+                this.buttonLogout.Visibility = Visibility.Collapsed;
+            }
         }
 
         private void listViewOrders_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,7 +103,20 @@ namespace BookStoreGUI
                 // Login successful
                 User = loginDialog.User;
                 this.textBlockStatus.Text = "You are logged in as " + User.FirstName + " " + User.LastName + ".";
+                InitializeMenu();
             }
+        }
+
+        private void ProfileButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (UserProfile == null || !UserProfile.IsLoaded)
+            {
+                UserProfile = new UserProfile(User);
+                UserProfile.Owner = this;
+            }
+
+            UserProfile.Show();
+            UserProfile.Focus();
         }
 
         private void ExitButton_Click(object sender, RoutedEventArgs e)
