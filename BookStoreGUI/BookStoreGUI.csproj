@@ -71,8 +71,8 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="PurchaseHistoryWindow.xaml.cs">
-      <DependentUpon>PurchaseHistoryWindow.xaml</DependentUpon>
+    <Compile Include="PurchaseHistoryDialog.xaml.cs">
+      <DependentUpon>PurchaseHistoryDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserRegisterDialog.xaml.cs">
       <DependentUpon>UserRegisterDialog.xaml</DependentUpon>
@@ -97,7 +97,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="PurchaseHistoryWindow.xaml">
+    <Page Include="PurchaseHistoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

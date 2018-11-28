@@ -190,8 +190,8 @@ namespace BookStoreGUI
 
         private void PurchaseHistory_Click(object sender, RoutedEventArgs e)
         {
-            PurchaseHistoryWindow phw = new PurchaseHistoryWindow();
-            phw.Show();
+            var purchaseHistoryDialog = new PurchaseHistoryDialog();
+            purchaseHistoryDialog.Show();
         }
     }
 }
