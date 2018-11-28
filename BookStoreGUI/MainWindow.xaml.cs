@@ -187,5 +187,11 @@ namespace BookStoreGUI
             // Start a new order
             bookOrder = new BookOrder();
         }
+
+        private void PurchaseHistory_Click(object sender, RoutedEventArgs e)
+        {
+            PurchaseHistoryWindow phw = new PurchaseHistoryWindow();
+            phw.Show();
+        }
     }
 }
