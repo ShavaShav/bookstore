@@ -98,7 +98,7 @@
         <StatusBar Grid.Row="1" HorizontalAlignment="Stretch">
             <DockPanel Width="775">
                 <TextBlock x:Name="textBlockStatus"><Run Text="Please login before proceeding to checkout."/></TextBlock>
-                <TextBox x:Name="about_text" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Bold"  Foreground="Blue" MouseLeftButtonUp="about_click">About Us</TextBox>
+                <TextBlock x:Name="about_text" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Bold" Foreground="Blue" MouseDown="about_click" TextDecorations="Underline">About Us</TextBlock>
             </DockPanel>
         </StatusBar>
     </Grid>

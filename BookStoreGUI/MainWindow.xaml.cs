@@ -273,5 +273,16 @@ namespace BookStoreGUI
             var purchaseHistoryDialog = new PurchaseHistoryDialog();
             purchaseHistoryDialog.Show();
         }
+
+        private void about_click(object sender, MouseButtonEventArgs e)
+        {
+
+            MessageBox.Show("A Online Bookstore application\n\n"+
+                            "Team Members :" + 
+                            "Ranim Aljoudi, John Binder, Shaela Khan,Tong Li,\n" +
+                            "Jake Poissant, Jai Priyadarshi, Zach Shaver, Akshit Tripathi."+
+                            "\n\nSpecial Thanks: This Project was supervised under Dr Yuan from computer "+
+                            "science department.", "About Us");
+        }
     }
 }
