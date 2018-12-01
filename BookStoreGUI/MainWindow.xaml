@@ -93,11 +93,13 @@
                     </Button.ContextMenu>
                 </Button>
                 <TextBox x:Name="totalPrice" IsReadOnly="True" HorizontalAlignment="Left" Height="23" Margin="480,0,0,1" TextWrapping="Wrap" Text="$0" VerticalAlignment="Center" Width="120"/>
-
             </Grid>
         </Grid>
         <StatusBar Grid.Row="1" HorizontalAlignment="Stretch">
-            <TextBlock x:Name="textBlockStatus"><Run Text="Please login before proceeding to checkout."/></TextBlock>
+            <DockPanel Width="775">
+                <TextBlock x:Name="textBlockStatus"><Run Text="Please login before proceeding to checkout."/></TextBlock>
+                <TextBlock x:Name="about_text" HorizontalAlignment="Right" FontStyle="Italic" FontWeight="Bold" Foreground="Blue" MouseDown="about_click" TextDecorations="Underline">About Us</TextBlock>
+            </DockPanel>
         </StatusBar>
     </Grid>
 </Window>

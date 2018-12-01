@@ -119,6 +119,19 @@ namespace BookStoreGUI
             UserProfile.Focus();
         }
 
+        private void about_click(object sender, RoutedEventArgs e)
+        {
+            if (Account.IsLoggedIn)
+            {
+                MessageBox.Show("Team Members : Ranim Aljoudi, John Binder, Shaela Khan,Tong Li,\n \t  Jake Poissant, Jai Priyadarshi, Zach Shaver, Akshit Tripathi. \n \n This Project was supervised under Dr Yuan from computer science department.", "About Us");
+                return;
+            }else
+            {
+                MessageBox.Show("You must be logged in to view the page.");
+                return;
+            }
+        }
+
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -259,6 +272,17 @@ namespace BookStoreGUI
         {
             var purchaseHistoryDialog = new PurchaseHistoryDialog();
             purchaseHistoryDialog.Show();
+        }
+
+        private void about_click(object sender, MouseButtonEventArgs e)
+        {
+
+            MessageBox.Show("A Online Bookstore application\n\n"+
+                            "Team Members :" + 
+                            "Ranim Aljoudi, John Binder, Shaela Khan,Tong Li,\n" +
+                            "Jake Poissant, Jai Priyadarshi, Zach Shaver, Akshit Tripathi."+
+                            "\n\nSpecial Thanks: This Project was supervised under Dr Yuan from computer "+
+                            "science department.", "About Us");
         }
     }
 }
