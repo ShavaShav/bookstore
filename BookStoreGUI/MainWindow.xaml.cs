@@ -41,7 +41,7 @@ namespace BookStoreGUI
             InitializeUI();
         }
 
-        // Initialize state of all UI components to their defaults
+        // Initialize state of all UI componets
         public void InitializeUI()
         {
             InitializeMenu();
