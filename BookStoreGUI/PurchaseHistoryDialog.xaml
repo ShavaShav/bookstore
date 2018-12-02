@@ -23,13 +23,25 @@
             </StackPanel>
         </Grid>
         <Border Background="#FFEEEEEE"  BorderBrush="#FF151515" BorderThickness="1" Grid.Row="1" Margin="8">
-            <DataGrid x:Name="dataGridPurchaseHistory" ItemsSource="{Binding dr_purchase_history}" SelectionMode="Single" VerticalAlignment="Top">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Header="Date" Width="*" Binding="{Binding Date}"/>
-                    <DataGridTextColumn Header="Order ID" Width="*" Binding="{Binding OrderID}" />
-                    <DataGridTextColumn Header="Price" Width="*" Binding="{Binding Price}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+            <StackPanel>
+                <ListView x:Name="listPurchaseHistory" Margin="0" BorderThickness="0">
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                    <ListView.View >
+                        <GridView>
+                            <!-- Find a way to stretch columns dynamically. Maybe use a DataGrid for this instead. -->
+                            <GridViewColumn Header="Order ID" DisplayMemberBinding="{Binding OrderID}" Width="100"/>
+                            <GridViewColumn Header="Date"  DisplayMemberBinding="{Binding Date}" Width="100"/>
+                            <GridViewColumn Header="ISBN"  DisplayMemberBinding="{Binding ISBN}" Width="100"/>
+                            <GridViewColumn Header="Quantity"  DisplayMemberBinding="{Binding Quantity}" Width="100"/>
+                            <GridViewColumn Header="Status"  DisplayMemberBinding="{Binding Status}" Width="100"/>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
         </Border>
     </Grid>
 </Window>

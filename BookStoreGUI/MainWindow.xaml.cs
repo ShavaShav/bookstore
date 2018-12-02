@@ -78,9 +78,6 @@ namespace BookStoreGUI
                 this.buttonLogin.Visibility = Visibility.Collapsed;
                 this.buttonProfile.Visibility = Visibility.Visible;
                 this.buttonLogout.Visibility = Visibility.Visible;
-                //Get order/purchase history 
-                PurchaseHistory history = new PurchaseHistory();
-                history.GetPurchaseInfo(User.Username);
             }
             else
             {
