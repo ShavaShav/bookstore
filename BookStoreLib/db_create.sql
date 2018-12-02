@@ -175,6 +175,79 @@ CREATE TABLE [dbo].[OrderItem] (
     CONSTRAINT [FK_OrderItem_Product] FOREIGN KEY ([ISBN]) REFERENCES [dbo].[Books] ([ISBN])
 );
 
+-------------------------------------------------------------------------------
+-- down_PlaceOrder Stored Procedure
+-------------------------------------------------------------------------------
+GO 
+CREATE PROCEDURE [down_PlaceOrder]
+(
+    @xmlOrder                 varchar(8000)
+)
+AS
+
+    DECLARE @idoc int		-- xml doc
+    DECLARE @OrderID int	-- new order
+
+    -- parse xml doc
+    EXEC sp_xml_preparedocument @idoc output, @xmlOrder
+
+
+    SET NOCOUNT ON
+    DECLARE @CurrentError int
+
+    -- start transaction, updating three tables
+    BEGIN TRANSACTION
+
+    -- add new order to Orders table
+    INSERT INTO Orders (UserID)
+    SELECT UserID
+    FROM OpenXML(@idoc, '/Order')
+    WITH Orders
+
+    -- check for error
+    SELECT @CurrentError = @@Error
+
+    IF @CurrentError != 0
+        BEGIN
+   	        GOTO ERROR_HANDLER
+        END
+
+    -- get new order id
+    SELECT @OrderID = @@IDENTITY
+
+    -- add line items to LineItem table
+    INSERT INTO OrderItem
+    SELECT @OrderID, ISBN, Quantity
+    FROM OpenXML(@idoc, '/Order/OrderItem')
+    WITH OrderItem
+
+    -- check for error
+    SELECT @CurrentError = @@Error
+
+    IF @CurrentError != 0
+        BEGIN
+   	        GOTO ERROR_HANDLER
+        END
+
+    
+    -- end of transaction
+    COMMIT TRANSACTION
+
+    SET NOCOUNT OFF
+
+    -- done with xml doc
+    EXEC sp_xml_removedocument @idoc
+
+    -- return the new order
+    RETURN @OrderID
+
+    ERROR_HANDLER:
+        ROLLBACK TRANSACTION
+        SET NOCOUNT OFF    
+        RETURN 0
+
+GO
+
 /********************************************************************************************************
  * SEED WITH FAKE DATA
  ********************************************************************************************************
